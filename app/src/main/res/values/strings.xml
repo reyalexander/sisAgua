@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TRANKI</string>
+    <string name="app_name">SISAGUA</string>
 
     <string name="action_sign_up">Registrarse</string>
     <string name="prompt_password">Contraseña</string>
@@ -56,8 +56,5 @@
     <string name="state_ok">OK</string>
     <string name="state_alert">SOS</string>
 
-    <string name="invited_use_app">Te invito a usar Tranki, Descargala en http://Tranki.com</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
