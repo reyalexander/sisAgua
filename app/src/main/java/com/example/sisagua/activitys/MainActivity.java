@@ -1,5 +1,6 @@
 package com.example.sisagua.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.sisagua.R;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,8 +28,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        CardView crd_new_check,crd_list_check,crd_lev;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        crd_new_check=(CardView) findViewById(R.id.ideaCard_new);
+        crd_list_check=(CardView) findViewById(R.id.ideaCard_lista);
+
+        crd_new_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NewSuministroActivity.class);//FormNewCheckListActivity.class
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        crd_list_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListSuministrosActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     /*
     @Override

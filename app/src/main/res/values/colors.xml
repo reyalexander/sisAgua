@@ -37,5 +37,16 @@
 
     <!--colros for card-->
     <color name="whiteCardColor">#fff</color>
+    <color name="colorAccentBlank">#fff</color>
+    <color name="colorGrisClaro">#D5D5D5</color>
+
+    <color name="found_red">#FAF4F4</color>
+
+    <color name="indicator_1">#8D0A08</color>
+    <color name="indicator_2">#8D0A08</color>
+    <color name="indicator_3">#8D0A08</color>
+    <color name="indicator_4">#08538D</color>
+
+    <color name="more_details">#C1C5CA</color>
 
 </resources>
