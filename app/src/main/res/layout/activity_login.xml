@@ -4,21 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".activitys.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.SisAgua.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.SisAgua.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:id="@+id/login_form"
@@ -46,11 +35,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_user"
                 android:layout_marginTop="10dp"
-                app:endIconMode="clear_text"
                 app:endIconTint="@color/colorGris"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/colorAccent"
-                app:counterOverflowTextColor="@color/colorAccent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 >
 
