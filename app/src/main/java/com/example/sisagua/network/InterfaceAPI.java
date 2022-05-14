@@ -12,6 +12,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface InterfaceAPI {
+    /*
     @POST("authentication/login/")
     Call<Credentials> loginWithCredentials(@Body Credentials user);
 
@@ -41,4 +42,5 @@ public interface InterfaceAPI {
 
     @PATCH("checklist/checklist/{idItem}/")
     Call<GetPatchValidateModel> patchValidate(@Header("authorization")String auth, @Path("idItem") int idItem, @Body PatchValidarModel patchLevItemModel);
+*/
 }
