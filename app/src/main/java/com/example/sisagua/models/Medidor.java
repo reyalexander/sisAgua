@@ -1,6 +1,8 @@
 package com.example.sisagua.models;
 
 public class Medidor {
+
+    private int idSQL;
     private int  id;
     private String codigo;
     private String tipo;
@@ -14,13 +16,22 @@ public class Medidor {
         this.codigo=this.tipo=this.fechaActual="";
     }
 
-    public Medidor(int id, String codigo, String tipo, int abonadoId, double lecturaActual, String fechaActual) {
+    public Medidor(int idsql,int id, String codigo, String tipo, int abonadoId, double lecturaActual, String fechaActual) {
+        this.idSQL =idsql;
         this.id = id;
         this.codigo = codigo;
         this.tipo = tipo;
         this.abonadoId = abonadoId;
         this.lecturaActual = lecturaActual;
         this.fechaActual = fechaActual;
+    }
+
+    public int getIdSQL() {
+        return idSQL;
+    }
+
+    public void setIdSQL(int idSQL) {
+        this.idSQL = idSQL;
     }
 
     public int getId() {

@@ -20,6 +20,7 @@ public class SqliteClass {
 
     /* @TABLE_ABONADO*/
     public static final String TABLE_ABONADO = "app_abonado";
+    public static final String AboIdSQL = "AboIdSQL";
     public static final String AboID = "AboID";
     public static final String AboNombre = "AboNombre";
     public static final String AboApellido = "AboApellido";
@@ -36,6 +37,7 @@ public class SqliteClass {
     /* @TABLE_Medidor*/
     public static final String TABLE_MEDIDOR = "app_medidor";
     public static final String MedID = "MedID";
+    public static final String MedIdSQL = "MedIdSQL";
     public static final String MedCodigo = "MedCodigo";
     public static final String MedAbonadoId = "MedAbonadoId";
     public static final String MedTipo = "MedTipo";
@@ -76,11 +78,11 @@ public class SqliteClass {
         public void onCreate(SQLiteDatabase db) {
             /* @TABLE_ABONADO */
             String CREATE_TABLE_ABONADO = "CREATE TABLE "+TABLE_ABONADO+ "("
-                    + AboID + " INTEGER PRIMARY KEY," + AboDNI + " TEXT,"+ AboApellido + " TEXT,"
+                    + AboIdSQL + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+ AboID + " INTEGER PRIMARY KEY," +  AboDNI + " TEXT,"+ AboApellido + " TEXT,"
                     + AboNombre + " TEXT,"  + AboDomicilio + " TEXT)";
             /* @TABLE_ABONADO */
             String CREATE_TABLE_MEDIDOR = "CREATE TABLE "+TABLE_MEDIDOR+ "("
-                    + MedID + " INTEGER PRIMARY KEY," + MedCodigo + " TEXT,"+ MedTipo + " TEXT,"+ MedAbonadoId + " INTEGER,"
+                    +MedIdSQL + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+ MedID + " INTEGER PRIMARY KEY," + MedCodigo + " TEXT,"+ MedTipo + " TEXT,"+ MedAbonadoId + " INTEGER,"
                     + MedlecturaActual + " DOUBLE,"+MedfechaActual + " TEXT)";
             /* @TABLE_LECTURA */
             String CREATE_TABLE_LECTURA = "CREATE TABLE "+TABLE_LECTURA+ "("
@@ -135,11 +137,12 @@ public class SqliteClass {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor curso = db.rawQuery(selectQuery, null);
                 if (curso.moveToFirst()) {
-                    model.setId(curso.getInt(1));
-                    model.setDni(curso.getString(2));
-                    model.setApellidos(curso.getString(3));
-                    model.setNombres(curso.getString(4));
-                    model.setDomicilio(curso.getString(5));
+                    model.setIdSQL(curso.getInt(1));
+                    model.setId(curso.getInt(2));
+                    model.setDni(curso.getString(3));
+                    model.setApellidos(curso.getString(4));
+                    model.setNombres(curso.getString(5));
+                    model.setDomicilio(curso.getString(6));
                 }
                 curso.close();
                 db.close();
@@ -154,6 +157,7 @@ public class SqliteClass {
 
                     do{
                         Abonado model = new Abonado();
+                        model.setIdSQL(curso.getInt(1));
                         model.setId(curso.getInt(1));
                         model.setDni(curso.getString(2));
                         model.setApellidos(curso.getString(3));
@@ -198,12 +202,13 @@ public class SqliteClass {
                 if (cursor.moveToFirst()) {
                     do{
                         Medidor model = new Medidor();
-                        model.setId(cursor.getInt(1));
-                        model.setCodigo(cursor.getString(2));
-                        model.setTipo(cursor.getString(3));
-                        model.setAbonadoId(cursor.getInt(4));
-                        model.setLecturaActual(cursor.getDouble(5));
-                        model.setFechaActual(cursor.getString(6));
+                        model.setIdSQL(cursor.getInt(1));
+                        model.setId(cursor.getInt(2));
+                        model.setCodigo(cursor.getString(3));
+                        model.setTipo(cursor.getString(4));
+                        model.setAbonadoId(cursor.getInt(5));
+                        model.setLecturaActual(cursor.getDouble(6));
+                        model.setFechaActual(cursor.getString(7));
                         models.add(model);
                     } while (cursor.moveToNext());
 
@@ -220,12 +225,13 @@ public class SqliteClass {
                 if (cursor.moveToFirst()) {
                     do{
                         Medidor model = new Medidor();
-                        model.setId(cursor.getInt(1));
-                        model.setCodigo(cursor.getString(2));
-                        model.setTipo(cursor.getString(3));
-                        model.setAbonadoId(cursor.getInt(4));
-                        model.setLecturaActual(cursor.getDouble(5));
-                        model.setFechaActual(cursor.getString(6));
+                        model.setIdSQL(cursor.getInt(1));
+                        model.setId(cursor.getInt(2));
+                        model.setCodigo(cursor.getString(3));
+                        model.setTipo(cursor.getString(4));
+                        model.setAbonadoId(cursor.getInt(5));
+                        model.setLecturaActual(cursor.getDouble(6));
+                        model.setFechaActual(cursor.getString(7));
                         models.add(model);
                     } while (cursor.moveToNext());
 
@@ -241,12 +247,13 @@ public class SqliteClass {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor cursor = db.rawQuery(selectQuery, null);
                 if (cursor.moveToFirst()) {
-                    model.setId(cursor.getInt(1));
-                    model.setCodigo(cursor.getString(2));
-                    model.setTipo(cursor.getString(3));
-                    model.setAbonadoId(cursor.getInt(4));
-                    model.setLecturaActual(cursor.getDouble(5));
-                    model.setFechaActual(cursor.getString(6));
+                    model.setIdSQL(cursor.getInt(1));
+                    model.setId(cursor.getInt(2));
+                    model.setCodigo(cursor.getString(3));
+                    model.setTipo(cursor.getString(4));
+                    model.setAbonadoId(cursor.getInt(5));
+                    model.setLecturaActual(cursor.getDouble(6));
+                    model.setFechaActual(cursor.getString(7));
                 }
                 cursor.close();
                 db.close();
