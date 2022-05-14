@@ -1,53 +1,64 @@
 package com.example.sisagua.models;
 
 public class Abonado {
-    private String AboID;
-    private String AboNombre;
-    private String AboApellido;
-    private String AboDomicilio;
+    private int id;
+    private String dni;
+    private String nombres;
+    private String apellidos;
+    private String domicilio;
 
     public Abonado(){
-        AboID = "";
-        AboApellido = "";
-        AboNombre = "";
-        AboDomicilio ="";
+        this.id=0;
+        this.dni="";
+        this.nombres="";
+        this.apellidos="";
+        this.domicilio="";
     }
-    public Abonado(String aboID, String aboNombre, String aboApellido, String aboDomicilio) {
-        AboID = aboID;
-        AboNombre = aboNombre;
-        AboApellido = aboApellido;
-        AboDomicilio = aboDomicilio;
-    }
-
-    public String getAboID() {
-        return AboID;
+    public Abonado(int id, String dni, String nombres, String apellidos, String domicilio) {
+        this.id = id;
+        this.dni = dni;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.domicilio = domicilio;
     }
 
-    public void setAboID(String aboID) {
-        AboID = aboID;
+    public int getId() {
+        return id;
     }
 
-    public String getAboNombre() {
-        return AboNombre;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setAboNombre(String aboNombre) {
-        AboNombre = aboNombre;
+    public String getDni() {
+        return dni;
     }
 
-    public String getAboApellido() {
-        return AboApellido;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public void setAboApellido(String aboApellido) {
-        AboApellido = aboApellido;
+    public String getNombres() {
+        return nombres;
     }
 
-    public String getAboDomicilio() {
-        return AboDomicilio;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public void setAboDomicilio(String aboDomicilio) {
-        AboDomicilio = aboDomicilio;
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
     }
 }

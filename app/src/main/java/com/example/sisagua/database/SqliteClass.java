@@ -24,6 +24,7 @@ public class SqliteClass {
     public static final String AboNombre = "AboNombre";
     public static final String AboApellido = "AboApellido";
     public static final String AboDomicilio = "AboDomicilio";
+    public static final String AboDNI = "AboDni";
 
     /* @TABLE_Lectura*/
     public static final String TABLE_LECTURA = "app_lectura";
@@ -37,6 +38,9 @@ public class SqliteClass {
     public static final String MedID = "MedID";
     public static final String MedCodigo = "MedCodigo";
     public static final String MedAbonadoId = "MedAbonadoId";
+    public static final String MedTipo = "MedTipo";
+    public static final String MedlecturaActual = "MedlecturaActual";
+    public static final String MedfechaActual = "MedfechaActual";
 
     public DatabaseHelper databasehelp;
     private static SqliteClass SqliteInstance = null;
@@ -72,12 +76,12 @@ public class SqliteClass {
         public void onCreate(SQLiteDatabase db) {
             /* @TABLE_ABONADO */
             String CREATE_TABLE_ABONADO = "CREATE TABLE "+TABLE_ABONADO+ "("
-                    + AboID + " INTEGER PRIMARY KEY," + AboApellido + " TEXT,"
+                    + AboID + " INTEGER PRIMARY KEY," + AboDNI + " TEXT,"+ AboApellido + " TEXT,"
                     + AboNombre + " TEXT,"  + AboDomicilio + " TEXT)";
             /* @TABLE_ABONADO */
             String CREATE_TABLE_MEDIDOR = "CREATE TABLE "+TABLE_MEDIDOR+ "("
-                    + MedID + " INTEGER PRIMARY KEY," + MedAbonadoId + " INTEGER,"
-                    + MedCodigo + " TEXT)";
+                    + MedID + " INTEGER PRIMARY KEY," + MedCodigo + " TEXT,"+ MedTipo + " TEXT,"+ MedAbonadoId + " INTEGER,"
+                    + MedlecturaActual + " DOUBLE,"+MedfechaActual + " TEXT)";
             /* @TABLE_LECTURA */
             String CREATE_TABLE_LECTURA = "CREATE TABLE "+TABLE_LECTURA+ "("
                     + LecID + " INTEGER PRIMARY KEY AUTOINCREMENT," + LecAbonadoId + " INTEGER,"
@@ -117,10 +121,11 @@ public class SqliteClass {
             public void addAbonado(Abonado abonado) {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 ContentValues values = new ContentValues();
-                values.put(AboID, abonado.getAboID());
-                values.put(AboApellido, abonado.getAboApellido());
-                values.put(AboNombre, abonado.getAboNombre());
-                values.put(AboDomicilio, abonado.getAboDomicilio());
+                values.put(AboID, abonado.getId());
+                values.put(AboDNI,abonado.getDni());
+                values.put(AboApellido, abonado.getApellidos());
+                values.put(AboNombre, abonado.getNombres());
+                values.put(AboDomicilio, abonado.getDomicilio());
                 db.insert(TABLE_ABONADO, null, values);
                 db.close();
             }
@@ -130,17 +135,18 @@ public class SqliteClass {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor curso = db.rawQuery(selectQuery, null);
                 if (curso.moveToFirst()) {
-                    model.setAboID(curso.getString(1));
-                    model.setAboApellido(curso.getString(2));
-                    model.setAboNombre(curso.getString(3));
-                    model.setAboDomicilio(curso.getString(4));
+                    model.setId(curso.getInt(1));
+                    model.setDni(curso.getString(2));
+                    model.setApellidos(curso.getString(3));
+                    model.setNombres(curso.getString(4));
+                    model.setDomicilio(curso.getString(5));
                 }
                 curso.close();
                 db.close();
                 return model;
             }
             public ArrayList<Abonado> getAllAbonados() {
-                ArrayList<Abonado> models = new ArrayList<Abonado>();
+                ArrayList<Abonado> models = new ArrayList<>();
                 String selectQuery = "SELECT * FROM " + TABLE_ABONADO;
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor curso = db.rawQuery(selectQuery, null);
@@ -148,10 +154,11 @@ public class SqliteClass {
 
                     do{
                         Abonado model = new Abonado();
-                        model.setAboID(curso.getString(1));
-                        model.setAboApellido(curso.getString(2));
-                        model.setAboNombre(curso.getString(3));
-                        model.setAboDomicilio(curso.getString(4));
+                        model.setId(curso.getInt(1));
+                        model.setDni(curso.getString(2));
+                        model.setApellidos(curso.getString(3));
+                        model.setNombres(curso.getString(4));
+                        model.setDomicilio(curso.getString(5));
                         models.add(model);
                     } while (curso.moveToNext());
 
@@ -173,24 +180,30 @@ public class SqliteClass {
             public void addMedidor(Medidor contac) {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 ContentValues values = new ContentValues();
-                values.put(MedID, contac.getMedID());
-                values.put(MedAbonadoId, contac.getMedAbonadoId());
-                values.put(MedCodigo, contac.getMedCodigo());
+                values.put(MedID, contac.getId());
+                values.put(MedCodigo,contac.getCodigo());
+                values.put(MedTipo,contac.getTipo());
+                values.put(MedAbonadoId,contac.getAbonadoId());
+                values.put(MedlecturaActual,contac.getLecturaActual());
+                values.put(MedfechaActual,contac.getFechaActual());
                 db.insert(TABLE_MEDIDOR, null, values);
                 db.close();
             }
 
             public ArrayList<Medidor> getAllMedidor() {
-                ArrayList<Medidor> models = new ArrayList<Medidor>();
+                ArrayList<Medidor> models = new ArrayList<>();
                 String selectQuery = "SELECT * FROM " + TABLE_MEDIDOR;
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor cursor = db.rawQuery(selectQuery, null);
                 if (cursor.moveToFirst()) {
                     do{
                         Medidor model = new Medidor();
-                        model.setMedID(Integer.parseInt(cursor.getString(1)));
-                        model.setMedAbonadoId(Integer.parseInt(cursor.getString(2)));
-                        model.setMedCodigo(cursor.getString(3));
+                        model.setId(cursor.getInt(1));
+                        model.setCodigo(cursor.getString(2));
+                        model.setTipo(cursor.getString(3));
+                        model.setAbonadoId(cursor.getInt(4));
+                        model.setLecturaActual(cursor.getDouble(5));
+                        model.setFechaActual(cursor.getString(6));
                         models.add(model);
                     } while (cursor.moveToNext());
 
@@ -200,16 +213,19 @@ public class SqliteClass {
                 return models;
             }
             public ArrayList<Medidor> getMedidorAbonado(String id) {
-                ArrayList<Medidor> models = new ArrayList<Medidor>();
+                ArrayList<Medidor> models = new ArrayList<>();
                 String selectQuery = "SELECT * FROM " + TABLE_MEDIDOR+" WHERE "+MedAbonadoId+ "='" + id + "'" ;
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor cursor = db.rawQuery(selectQuery, null);
                 if (cursor.moveToFirst()) {
                     do{
                         Medidor model = new Medidor();
-                        model.setMedID(Integer.parseInt(cursor.getString(1)));
-                        model.setMedAbonadoId(Integer.parseInt(cursor.getString(2)));
-                        model.setMedCodigo(cursor.getString(3));
+                        model.setId(cursor.getInt(1));
+                        model.setCodigo(cursor.getString(2));
+                        model.setTipo(cursor.getString(3));
+                        model.setAbonadoId(cursor.getInt(4));
+                        model.setLecturaActual(cursor.getDouble(5));
+                        model.setFechaActual(cursor.getString(6));
                         models.add(model);
                     } while (cursor.moveToNext());
 
@@ -225,10 +241,12 @@ public class SqliteClass {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor cursor = db.rawQuery(selectQuery, null);
                 if (cursor.moveToFirst()) {
-
-                    model.setMedID(Integer.parseInt(cursor.getString(1)));
-                    model.setMedAbonadoId(Integer.parseInt(cursor.getString(2)));
-                    model.setMedCodigo(cursor.getString(3));
+                    model.setId(cursor.getInt(1));
+                    model.setCodigo(cursor.getString(2));
+                    model.setTipo(cursor.getString(3));
+                    model.setAbonadoId(cursor.getInt(4));
+                    model.setLecturaActual(cursor.getDouble(5));
+                    model.setFechaActual(cursor.getString(6));
                 }
                 cursor.close();
                 db.close();
@@ -257,7 +275,7 @@ public class SqliteClass {
             }
 
             public ArrayList<Lectura> getAllLectura() {
-                ArrayList<Lectura> models = new ArrayList<Lectura>();
+                ArrayList<Lectura> models = new ArrayList<>();
                 String selectQuery = "SELECT * FROM " + TABLE_LECTURA;
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor cursor = db.rawQuery(selectQuery, null);
@@ -277,7 +295,7 @@ public class SqliteClass {
                 return models;
             }
             public ArrayList<Lectura> getLecturaXAbonado(String id) {
-                ArrayList<Lectura> models = new ArrayList<Lectura>();
+                ArrayList<Lectura> models = new ArrayList<>();
                 String selectQuery = "SELECT * FROM " + TABLE_LECTURA+" WHERE "+LecAbonadoId+ "='" + id + "'" ;
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
                 Cursor cursor = db.rawQuery(selectQuery, null);
