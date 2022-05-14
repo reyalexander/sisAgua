@@ -1,26 +1,26 @@
 package com.example.sisagua.network;
 
+import com.example.sisagua.models.Abonado;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.Path;
 
 public interface InterfaceAPI {
-
-
     /*
     @POST("authentication/login/")
-    Call<Credentials> loginWithCredentials(@Body Credentials user);
-
-    @GET ("companies/operation/")
-    Call<List<OperacionModel>> getOperations(@Header("authorization") String auth);
-
+    Call<Abonado> loginWithCredentials(@Body Credentials user);
+    */
+    @GET ("abonados/")
+    Call<List<Abonado>> getAbonados(@Header("authorization") String auth);
+    /*
     @POST ("checklist/locations")
     Call<LocationModel> postLocation(@Header("authorization") String auth, @Body LocationModel locationModel);
 
@@ -44,5 +44,5 @@ public interface InterfaceAPI {
 
     @PATCH("checklist/checklist/{idItem}/")
     Call<GetPatchValidateModel> patchValidate(@Header("authorization")String auth, @Path("idItem") int idItem, @Body PatchValidarModel patchLevItemModel);
-*/
+    */
 }

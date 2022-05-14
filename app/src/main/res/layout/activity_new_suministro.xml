@@ -27,7 +27,8 @@
                 android:text="Creación Suministro"
                 android:textSize="28dp"/>
 
-            <!-- Tipo Checklist -->
+
+            <!--Seleccione Abonado -->
             <com.google.android.material.card.MaterialCardView
                 app:cardElevation="5dp"
                 app:cardCornerRadius="12dp"
@@ -43,44 +44,39 @@
                     android:layout_margin="@dimen/margin"
                     android:background="@color/colorAccent"
                     android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="5dp"
+                        android:gravity="center"
+                        android:text="Seleccione Abonado"
+                        android:textSize="16dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/border_linear_layout_round"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                            android:gravity="center"
-                            android:paddingTop="20dp"
-                            android:paddingBottom="20dp"
-                            android:text="Seleccione Abonado"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <Spinner
-                            android:id="@+id/spnr_tipe_check"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/border_linear_layout_round">
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center"
+                            android:layout_height="50dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/black"
+                                android:hint="Ingrese nombre/DNI"
+                                android:id="@+id/txt_input_abonados">
 
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp" />
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </LinearLayout>
+
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/border_linear_layout_round"
-                        android:orientation="horizontal">
-                    </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -110,10 +106,8 @@
                         android:textStyle="bold"
                         android:layout_marginHorizontal="5dp"
                         android:gravity="center"
-                        android:text="Seleccione Suministro"
+                        android:text="Seleccione Medidor"
                         android:textSize="16dp"/>
-
-
 
 
                     <LinearLayout
@@ -135,11 +129,11 @@
                             android:paddingBottom="10dp"
                             android:textStyle="bold"
                             android:gravity="center"
-                            android:text="Sumistro(s):"
+                            android:text="Medidor(es):"
                             android:textSize="18dp"/>
 
                         <Spinner
-                            android:id="@+id/spnr_location"
+                            android:id="@+id/spnr_medidor"
                             android:layout_width="160dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -148,7 +142,7 @@
                             android:layout_marginBottom="5dp"/>
 
                         <Button
-                            android:id="@+id/bt_add_location"
+                            android:id="@+id/bt_add_suministro"
                             android:textColor="@color/black"
                             android:backgroundTint="@color/colorGrisClaro"
                             android:text="+"
