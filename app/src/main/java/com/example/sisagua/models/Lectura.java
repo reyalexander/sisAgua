@@ -2,65 +2,66 @@ package com.example.sisagua.models;
 import java.lang.Integer;
 
 public class Lectura{
-    private int LecID;
-    private int LecAbonadoId;
-    private int LecMedidorId;
-    private String LecCiclo;
-    private String LecActual;
+
+    private int idSQL;
+    private int lecturaActual;
+    private int aboId;
+    private int cicloId;
+    private int medidorId;
 
     public Lectura(){
-        LecID = 0;
-        LecAbonadoId = 0;
-        LecMedidorId = 0;
-        LecCiclo = "";
-        LecActual = "";
+        lecturaActual = 0;
+        aboId = 0;
+        cicloId = 0;
+        medidorId = 0;
     }
 
-    public Lectura(int lecID, int lecAbonadoId, int lecMedidorId, String lecCiclo, String lecActual) {
-        LecID = lecID;
-        LecAbonadoId = lecAbonadoId;
-        LecMedidorId = lecMedidorId;
-        LecCiclo = lecCiclo;
-        LecActual = lecActual;
+    public Lectura(int idSQL, int lecturaActual, int aboId, int cicloId, int medidorId) {
+        this.idSQL = idSQL;
+        this.lecturaActual = lecturaActual;
+        this.aboId = aboId;
+        this.cicloId = cicloId;
+        this.medidorId = medidorId;
     }
 
-    public int getLecID() {
-        return LecID;
+    public int getIdSQL() {
+        return idSQL;
     }
 
-    public void setLecID(int lecID) {
-        LecID = lecID;
+    public void setIdSQL(int idSQL) {
+        this.idSQL = idSQL;
     }
 
-    public int getLecAbonadoId() {
-        return LecAbonadoId;
+    public int getLecturaActual() {
+        return lecturaActual;
     }
 
-    public void setLecAbonadoId(int lecAbonadoId) {
-        LecAbonadoId = lecAbonadoId;
+    public void setLecturaActual(int lecturaActual) {
+        this.lecturaActual = lecturaActual;
     }
 
-    public int getLecMedidorId() {
-        return LecMedidorId;
+    public int getAboId() {
+        return aboId;
     }
 
-    public void setLecMedidorId(int lecMedidorId) {
-        LecMedidorId = lecMedidorId;
+    public void setAboId(int aboId) {
+        this.aboId = aboId;
     }
 
-    public String getLecCiclo() {
-        return LecCiclo;
+    public int getCicloId() {
+        return cicloId;
     }
 
-    public void setLecCiclo(String lecCiclo) {
-        LecCiclo = lecCiclo;
+    public void setCicloId(int cicloId) {
+        this.cicloId = cicloId;
     }
 
-    public String getLecActual() {
-        return LecActual;
+    public int getMedidorId() {
+        return medidorId;
     }
 
-    public void setLecActual(String lecActual) {
-        LecActual = lecActual;
+    public void setMedidorId(int medidorId) {
+        this.medidorId = medidorId;
     }
+
 }

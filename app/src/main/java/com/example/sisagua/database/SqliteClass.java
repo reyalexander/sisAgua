@@ -65,14 +65,14 @@ public class SqliteClass {
 
         public AppAbonadoSql abonadoSql;
         public AppMedidorSql MedidorSql;
-        public AppLecturaSql LecturaSql;
+        //public AppLecturaSql LecturaSql;
 
         public DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
             this.context = context;
             abonadoSql = new AppAbonadoSql();
             MedidorSql = new AppMedidorSql();
-            LecturaSql = new AppLecturaSql();
+            //LecturaSql = new AppLecturaSql();
         }
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -262,6 +262,7 @@ public class SqliteClass {
         }
 
         /* @CLASS_LECTURASQL */
+        /*
         public class AppLecturaSql {
             public void deleteLectura() {
                 SQLiteDatabase db = databasehelp.getWritableDatabase();
@@ -340,7 +341,9 @@ public class SqliteClass {
                 db.close();
                 return model;
             }
-        }
+
+
+        }*/
     }
 
 }

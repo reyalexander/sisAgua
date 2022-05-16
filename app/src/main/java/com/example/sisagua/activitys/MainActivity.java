@@ -11,6 +11,8 @@ import com.example.sisagua.models.Abonado;
 import com.example.sisagua.network.InterfaceAPI;
 import com.example.sisagua.utils.ConnectionDetector;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         crd_new_check=(CardView) findViewById(R.id.ideaCard_new);
         crd_list_check=(CardView) findViewById(R.id.ideaCard_lista);
@@ -72,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main,menu);
         //menu.findItem(R.id.action_profile).setVisible(false);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent i =new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(i);
+        finish();
+        return super.onOptionsItemSelected(item);
     }
     /*
     @Override
