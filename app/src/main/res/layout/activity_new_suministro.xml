@@ -16,19 +16,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <!--Seleccione Abonado -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="140dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center_horizontal|top"
+                android:paddingTop="100dp"
                 android:paddingBottom="80dp"
                 android:text="Creación Suministro"
                 android:textColor="@color/black"
                 android:textSize="28dp"
                 android:textStyle="bold" />
 
-
-            <!--Seleccione Abonado -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,23 +92,29 @@
 
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:background="#FFFFFF">
 
                             <Spinner
                                 android:id="@+id/spnr_abonados"
                                 android:layout_width="300dp"
-                                android:layout_height="40dp"
+                                android:layout_height="48dp"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="5dp"
-                                android:background="#FFFFFF"
+                                android:clickable="false"
+                                android:clipChildren="false"
+                                android:clipToPadding="false"
+                                android:scrollbarTrackHorizontal="@android:drawable/arrow_down_float"
+                                android:scrollbarTrackVertical="@android:drawable/arrow_down_float"
+                                android:spinnerMode="dropdown"
+                                android:visibility="visible"
                                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -165,16 +173,21 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
-                        <Spinner
-                            android:id="@+id/spnr_medidor"
-                            android:layout_width="160dp"
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:background="#FFFFFF"
-                            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                            android:background="#FFFFFF">
+
+                            <Spinner
+                                android:id="@+id/spnr_medidor"
+                                android:layout_width="160dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <Button
                             android:id="@+id/bt_add_suministro"
