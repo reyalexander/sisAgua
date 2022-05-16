@@ -78,11 +78,11 @@ public class SqliteClass {
         public void onCreate(SQLiteDatabase db) {
             /* @TABLE_ABONADO */
             String CREATE_TABLE_ABONADO = "CREATE TABLE "+TABLE_ABONADO+ "("
-                    + AboIdSQL + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+ AboID + " INTEGER PRIMARY KEY," +  AboDNI + " TEXT,"+ AboApellido + " TEXT,"
+                    + AboIdSQL + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+ AboID + " INTEGER," +  AboDNI + " TEXT,"+ AboApellido + " TEXT,"
                     + AboNombre + " TEXT,"  + AboDomicilio + " TEXT)";
             /* @TABLE_ABONADO */
             String CREATE_TABLE_MEDIDOR = "CREATE TABLE "+TABLE_MEDIDOR+ "("
-                    +MedIdSQL + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+ MedID + " INTEGER PRIMARY KEY," + MedCodigo + " TEXT,"+ MedTipo + " TEXT,"+ MedAbonadoId + " INTEGER,"
+                    +MedIdSQL + "  INTEGER PRIMARY KEY AUTOINCREMENT,"+ MedID + " INTEGER," + MedCodigo + " TEXT,"+ MedTipo + " TEXT,"+ MedAbonadoId + " INTEGER,"
                     + MedlecturaActual + " DOUBLE,"+MedfechaActual + " TEXT)";
             /* @TABLE_LECTURA */
             String CREATE_TABLE_LECTURA = "CREATE TABLE "+TABLE_LECTURA+ "("

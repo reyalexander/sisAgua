@@ -1,30 +1,37 @@
 package com.example.sisagua.activitys;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.example.sisagua.R;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.sisagua.models.Abonado;
+import com.example.sisagua.network.InterfaceAPI;
+import com.example.sisagua.utils.ConnectionDetector;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
 import androidx.cardview.widget.CardView;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.sisagua.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
+    Context context;
+    ConnectionDetector connectionDetector;
+    static ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,56 +64,65 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    /*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        //setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.login_form);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_inner, menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        //menu.findItem(R.id.action_profile).setVisible(false);
         return true;
     }
-
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(id == R.id.action_update){
+            if(connectionDetector.isConnectingToInternet()){
+                new UpdateInformation().execute(true);
+            } else {
+                Toast.makeText(context,"El equipo no tiene conexión a internet",Toast.LENGTH_LONG).show();
+            }
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.login_form);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
-    */
+     */
+    /*
+    class UpdateInformation extends AsyncTask<Boolean, Void, String>{
+        @Override
+        protected void onPreExecute(){
+            dialog = ProgressDialog.show(context, "", "Loading...", true);
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            dialog.dismiss();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Boolean... booleans){
+            String token = "";
+            try {
+
+                Call<List<Abonado>> getAbonados = api.getAbonados();
+                Response<List<Abonado>> responseAbonados = getAbonados.execute();
+                List<Abonado> listResponseAbonados = responseAbonados.body();
+                /*
+                for(Abonado abonado : listResponseAbonados){
+                    SqliteClass.getInstance(context).databasehelp.abonadoSql.addAbonado(abonado);
+                }
+
+
+
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            return "";
+        }
+
+    }*/
 }
