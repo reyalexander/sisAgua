@@ -64,11 +64,7 @@ public class NewSuministroActivity extends AppCompatActivity{
 
     ArrayList<Abonado> abonados = new ArrayList<Abonado>();
     Medidor medidor = new Medidor();
-    /*
-    ArrayList<String> nameAbonados = new ArrayList<String>();
-    ArrayList<String> dniAbonados = new ArrayList<String>();
 
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +77,6 @@ public class NewSuministroActivity extends AppCompatActivity{
         txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
-        System.out.println("Hola mundoooooooo xdXD");
         getAbonados();
         getMedidores();
 
@@ -193,12 +188,7 @@ public class NewSuministroActivity extends AppCompatActivity{
 
                         String id = String.valueOf(lectura.getAboId());
                         final String idSql = String.valueOf(lectura.getIdSQL());
-                        /*
-                        SqliteClass.getInstance(context).databasehelp.itemSql.updateValueItemById(
-                                SqliteClass.KEY_ITEMOBSLIFIMA,
-                                "",
-                                String.valueOf(patchLevItemModel.getObservation_lifting_image()));
-                        */
+
                         Call<List<Lectura>> postLocationHead = api.postLecturas(token);
 
                         try {
