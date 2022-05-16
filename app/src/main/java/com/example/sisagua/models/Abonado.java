@@ -8,6 +8,20 @@ public class Abonado {
     private String apellidos;
     private String domicilio;
 
+    public Abonado(){
+        this.id=0;
+        this.dni=this.nombres=this.apellidos=this.domicilio="";
+    }
+
+    public Abonado(int idsql,int id, String dni, String nombres, String apellidos, String domicilio) {
+        this.idSQL =idsql;
+        this.id = id;
+        this.dni = dni;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.domicilio = domicilio;
+    }
+
     public int getIdSQL() {
         return idSQL;
     }
@@ -54,5 +68,14 @@ public class Abonado {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public Abonado (String name, String lastname){
+        this.nombres = name;
+        this.apellidos = lastname;
+    }
+
+    public String toString(){
+        return nombres + " " + apellidos;
     }
 }

@@ -81,4 +81,8 @@ public class Medidor {
     public void setFechaActual(String fechaActual) {
         this.fechaActual = fechaActual;
     }
+
+    public Medidor (String codigo){ this.codigo = codigo;}
+
+    public String toString(){ return codigo;}
 }

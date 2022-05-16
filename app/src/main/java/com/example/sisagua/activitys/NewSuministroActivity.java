@@ -5,8 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,6 +22,10 @@ import com.example.sisagua.database.SqliteClass;
 import com.example.sisagua.models.Abonado;
 import com.example.sisagua.models.Medidor;
 import com.example.sisagua.network.InterfaceAPI;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +43,13 @@ public class NewSuministroActivity extends AppCompatActivity{
 
     EditText txt_input_abonados;
     TextView tv_data;
-    Spinner spnr_medidor;
+    Spinner spnr_medidor,spnr_abonado;
     Button bt_add_suministro;
     Context context = this;
     Activity activity = this;
+
+    List<Medidor> getMedidoresCodigo = new ArrayList<>();
+    List<Abonado> getAbonadosNames= new ArrayList<>();
 
 
     ArrayList<Abonado> abonados = new ArrayList<Abonado>();
@@ -57,19 +66,12 @@ public class NewSuministroActivity extends AppCompatActivity{
         setContentView(R.layout.activity_new_suministro);
 
         txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
-        tv_data = (TextView) findViewById(R.id.tv_data);
+        spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
+        spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
         System.out.println("Hola mundoooooooo xdXD");
         getAbonados();
-        //GET ALL ABONADOS
-        /*
-        abonadoModels = SqliteClass.getInstance(context).databasehelp.abonadoSql.getAllAbonados();
-        for(int i=0; i<abonadoModels.size(); i++){
-            nameAbonados.add(abonadoModels.get(i).getNombres());
-            dniAbonados.add(abonadoModels.get(i).getDni());
-        }
-        */
+        getMedidores();
 
-        System.out.println("Hola mundoooooooo pendejosss");
         txt_input_abonados.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -97,27 +99,11 @@ public class NewSuministroActivity extends AppCompatActivity{
             }
         });
 
-        //AAREA SUPERVISOR
-        spnr_medidor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position!=0){
-                    sup="1";
-                    medidor.setAbonadoId(medidor.getAbonadoId());
-                    medidor.setCodigo(medidor.getCodigo());
-                } else {
-                    sup="0";
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
-
+    /*
     private void getAbonados(){
+
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -153,31 +139,61 @@ public class NewSuministroActivity extends AppCompatActivity{
         });
     }
 
-    private void getMedidores(){
+     */
+    private void getAbonados(){
+        ArrayAdapter<Abonado> adapter = new ArrayAdapter<Abonado>(this, android.R.layout.simple_spinner_item,getAbonadosNames);
         Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
         InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
-        Call<List<Medidor>> call = interfaceAPI.getMedidores(token,"id");
+        Call<List<Abonado>> call = interfaceAPI.getAbonados(token);
+        call.enqueue(new Callback<List<Abonado>>() {
+            @Override
+            public void onResponse(Call<List<Abonado>>call, Response<List<Abonado>> response) {
+                Log.i("Response", response.body().toString());
+                if (response.isSuccessful()) {
+                    for (Abonado postabonado : response.body()){
+                        String name = postabonado.getNombres();
+                        String lastname = postabonado.getApellidos();
+                        Abonado abonado = new Abonado(name , lastname);
+                        getAbonadosNames.add(abonado);
 
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spnr_abonado.setAdapter(adapter);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Abonado>> call, Throwable t) {
+                Toast.makeText(NewSuministroActivity.this,"Error de conexion", Toast.LENGTH_SHORT);
+            }
+
+        });
+    }
+
+    private void getMedidores(){
+        ArrayAdapter<Medidor> adapter = new ArrayAdapter<Medidor>(this, android.R.layout.simple_spinner_item,getMedidoresCodigo);
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+
+        InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
+        Call<List<Medidor>> call = interfaceAPI.getMedidores(token);
         call.enqueue(new Callback<List<Medidor>>() {
             @Override
             public void onResponse(Call<List<Medidor>>call, Response<List<Medidor>> response) {
-                try {
-                    if (!response.isSuccessful()){
-                        txt_input_abonados.setText("Nombres: " + response.code());
-                        return;
+                Log.i("Response", response.body().toString());
+                if (response.isSuccessful()) {
+                    for (Medidor post : response.body()){
+                        String code = post.getCodigo();
+                        Medidor medidor = new Medidor(code);
+                        getMedidoresCodigo.add(medidor);
+
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spnr_medidor.setAdapter(adapter);
                     }
 
-                    List<Medidor> medidorList = response.body();
-                    for(Medidor medidor : medidorList){
-                        String content = "";
-                        content += "Codigo: " + medidor.getCodigo() + " ";
-                        content += "Tipo: " + medidor.getTipo() + "\n\n";
-                        txt_input_abonados.append(content);
-                    }
-                }catch (Exception ex){
-                    Toast.makeText(NewSuministroActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 

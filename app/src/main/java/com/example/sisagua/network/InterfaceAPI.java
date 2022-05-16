@@ -19,7 +19,7 @@ public interface InterfaceAPI {
     @GET ("api/abonados")
     Call<List<Abonado>> getAbonados(@Header("authorization") String auth);
 
-    @GET ("api/abonados/medidores/{id}")
-    Call<List<Medidor>> getMedidores(@Header("authorization") String auth, @Path("id") String id);
+    @GET ("api/resources/medidores")
+    Call<List<Medidor>> getMedidores(@Header("authorization") String auth);
 
 }
