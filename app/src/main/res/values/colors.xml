@@ -28,7 +28,8 @@
     <color name="found_flbtn">#FFFFFF</color>
     <color name="green">#14FF00</color>
     <color name="red">#FF0000</color>
-
+    <color name="opositte">#588af6</color>
+    <color name="opositte2">#c458f6</color>
 
     <!--colors for modern ui-->
     <color name="whiteTextColor">#fff</color>

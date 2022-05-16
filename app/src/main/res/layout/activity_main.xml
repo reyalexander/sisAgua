@@ -1,119 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activitys.MainActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="40dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:text="@string/text_acciones"
+        android:textColor="#B84A27"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        tools:text="@string/text_acciones" />
 
-        <com.google.android.material.card.MaterialCardView
-            app:cardElevation="10dp"
-            app:cardCornerRadius="12dp"
-            android:id="@+id/ideaCard_lev"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ideaCard_lev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:visibility="gone"
-            android:layout_margin="10dp">
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="20dp"
-                    android:text="Levantamiento de Observaciones"/>
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/ic_list_check"/>
+                android:text="@string/levantamiento_de_observaciones"
+                android:textSize="20sp" />
 
-            </LinearLayout>
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_list_check"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck"
+                android:contentDescription="TODO" />
 
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            app:cardElevation="10dp"
-            app:cardCornerRadius="12dp"
+    </com.google.android.material.card.MaterialCardView>
 
-            android:id="@+id/ideaCard_lista"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ideaCard_lista"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:paddingVertical="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        android:focusable="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:paddingVertical="20dp"
-            android:layout_margin="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="Lista de Suministros"/>
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/ic_list_check"/>
+            android:layout_height="104dp"
+            android:layout_gravity="center"
+            android:background="@color/moneda"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lista_de_suministros_text"
+                android:textColor="#000000"
+                android:textSize="22sp" />
 
-        </com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:layout_width="89dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/list_contentDescription"
+                android:foregroundGravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_list_check"
+                tools:ignore="ImageContrastCheck,ImageContrastCheck" />
 
-        <com.google.android.material.card.MaterialCardView
-            app:cardElevation="10dp"
-            app:cardCornerRadius="12dp"
-            android:id="@+id/ideaCard_new"
-            android:clickable="true"
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ideaCard_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:paddingVertical="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+        android:focusable="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="20dp"
-            android:layout_margin="10dp">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_orange_dark"
+            android:gravity="center"
+            android:orientation="vertical"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-                android:paddingBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crear_suministro_text"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Crear Suministro"
-                    android:textSize="20dp" />
+            <ImageView
+                android:layout_width="49dp"
+                android:layout_height="43dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="false"
+                android:contentDescription="@string/add_contentDescription"
+                android:cropToPadding="false"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_system_update_black_24dp"
+                app:srcCompat="@drawable/add"
+                tools:ignore="ImageContrastCheck" />
 
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/ic_system_update_black_24dp" />
+        </LinearLayout>
 
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-
+    </com.google.android.material.card.MaterialCardView>
 
 
-</FrameLayout>
+</LinearLayout>

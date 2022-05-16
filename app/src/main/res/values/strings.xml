@@ -55,6 +55,14 @@
 
     <string name="state_ok">OK</string>
     <string name="state_alert">SOS</string>
-
-
+    <string name="me_olvide_la_contrase_a">Me olvide la contraseña</string>
+    <string name="todo">TODO</string>
+    <string name="idea_card">Crear Suministro</string>
+    <string name="idcard_list_Button">TODO</string>
+    <string name="lista_de_suministros_text">Lista de Suministros</string>
+    <string name="crear_suministro_text">Crear Suministro</string>
+    <string name="list_contentDescription">Imagen de Lista</string>
+    <string name="add_contentDescription">Imagen de Agregar</string>
+    <string name="text_acciones">ACCIONES</string>
+    <string name="levantamiento_de_observaciones">Levantamiento de Observaciones</string>
 </resources>

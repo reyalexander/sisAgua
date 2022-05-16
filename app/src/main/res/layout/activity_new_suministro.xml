@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/found_red"
+    android:background="@color/colorAccentBlank"
     tools:context=".activitys.NewSuministroActivity">
 
     <ScrollView
@@ -19,60 +19,61 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:paddingTop="140dp"
                 android:paddingBottom="80dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/black"
                 android:text="Creación Suministro"
-                android:textSize="28dp"/>
+                android:textColor="@color/black"
+                android:textSize="28dp"
+                android:textStyle="bold" />
 
 
             <!--Seleccione Abonado -->
             <com.google.android.material.card.MaterialCardView
-                app:cardElevation="5dp"
-                app:cardCornerRadius="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:paddingVertical="15dp"
-                android:layout_margin="5dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin"
-                    android:background="@color/colorAccent"
+                    android:background="@color/moneda"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="15dp"
-                        android:textStyle="bold"
                         android:layout_marginHorizontal="5dp"
                         android:gravity="center"
+                        android:paddingTop="15dp"
                         android:text="Seleccione Abonado"
-                        android:textSize="16dp"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="15dp"
-                        android:textStyle="bold"
                         android:layout_marginHorizontal="5dp"
                         android:gravity="center"
-                        android:textSize="16dp"/>
+                        android:paddingTop="15dp"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginRight="1dp"
                         android:layout_marginLeft="5dp"
-                        android:background="@drawable/border_linear_layout_round">
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/border_linear_layout_round"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -80,15 +81,20 @@
                             android:orientation="vertical">
 
                             <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/txt_input_abonados">
-                            </EditText>
+                                android:id="@+id/txt_input_abonados"
+                                android:layout_width="307dp"
+                                android:layout_height="40dp"
+                                android:background="#FFFFFF"
+                                android:hint="@string/action_loading"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:ignore="TouchTargetSizeCheck,TextContrastCheck"></EditText>
+
                             <TextView
+                                android:id="@+id/texto_contador"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/texto_contador">
-                            </TextView>
+                                android:layout_height="wrap_content"></TextView>
 
                         </LinearLayout>
 
@@ -101,53 +107,54 @@
 
             <!--Datos Generales -->
             <com.google.android.material.card.MaterialCardView
-                app:cardElevation="5dp"
-                app:cardCornerRadius="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:clickable="true"
                 android:paddingVertical="15dp"
-                android:layout_margin="5dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin"
-                    android:background="@color/colorAccent"
+                    android:background="@color/moneda"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="15dp"
-                        android:textStyle="bold"
                         android:layout_marginHorizontal="5dp"
                         android:gravity="center"
+                        android:paddingTop="15dp"
                         android:text="Seleccione Medidor"
-                        android:textSize="16dp"/>
-
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginRight="1dp"
                         android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@drawable/border_linear_layout_round"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_marginEnd="5dp"
                             android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:gravity="center"
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:textStyle="bold"
-                            android:gravity="center"
                             android:text="Medidor(es):"
-                            android:textSize="18dp"/>
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                         <Spinner
                             android:id="@+id/spnr_medidor"
@@ -156,28 +163,30 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="5dp"
+                            android:background="#FFFFFF"
+                            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
                         <Button
                             android:id="@+id/bt_add_suministro"
-                            android:textColor="@color/black"
-                            android:backgroundTint="@color/colorGrisClaro"
-                            android:text="+"
-                            android:textStyle="bold"
-                            android:textSize="30dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="1dp"
-                            android:layout_marginRight="1dp"
                             android:layout_marginTop="1dp"
-                            android:layout_marginBottom="1dp"/>
+                            android:layout_marginRight="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:backgroundTint="@color/colorGrisClaro"
+                            android:text="+"
+                            android:textColor="#000000"
+                            android:textSize="30dp"
+                            android:textStyle="bold"
+                            tools:ignore="TextContrastCheck" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
 
 
         </LinearLayout>

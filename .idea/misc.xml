@@ -8,18 +8,29 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.138" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_list_check.xml" value="0.124" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_system_update_black_24dp.xml" value="0.124" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_wifi_network - copia.xml" value="0.2595" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/drawable/ic_launcher_background.xml" value="0.138" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_list_suministro.xml" value="0.2" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_list_suministro.xml" value="0.11197916666666667" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_new_suministro.xml" value="0.264" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_new_suministro.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/activity_register.xml" value="0.253125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/fragment_second.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/layout/row_list.xml" value="0.2" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/sisAgua/app/src/main/res/menu/menu_main.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/drawable-v24/borde_linear_layout.xml" value="0.259" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/drawable-v24/border_linear_layout_round.xml" value="0.259" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_filter.xml" value="0.259" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_list_check.xml" value="0.259" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/drawable-v24/ic_system_update_black_24dp.xml" value="0.259" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/drawable/ic_launcher_background.xml" value="0.259" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/layout/activity_list_suministro.xml" value="0.26902173913043476" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/layout/activity_login.xml" value="0.23020833333333332" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/layout/activity_new_suministro.xml" value="0.33" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/layout/activity_register.xml" value="0.2210144927536232" />
+        <entry key="..\:/Users/user/StudioProjects/sisAgua/app/src/main/res/layout/row_list.xml" value="0.2210144927536232" />
       </map>
     </option>
   </component>
