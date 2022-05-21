@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(context,"El equipo no tiene conexión a internet",Toast.LENGTH_LONG).show();
             }
         }
-        else if (id == R.id.action_logout) {
+        else if (id == R.id.action_logout) {jeanfranco
             CommonDialogs.showLogoutDialog(this,context);
         }
         return super.onOptionsItemSelected(item);
