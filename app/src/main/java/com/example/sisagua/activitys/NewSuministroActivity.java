@@ -85,7 +85,6 @@ public class NewSuministroActivity extends AppCompatActivity{
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
         //et_lectura = (EditText) findViewById(R.id.et_lectura);
-        //et_importe = (EditText) findViewById(R.id.et_importe);
 
         getAbonados();
         getMedidores();
@@ -156,30 +155,6 @@ public class NewSuministroActivity extends AppCompatActivity{
                     }
                 });
 
-                final EditText et_importe = (EditText) view.findViewById(R.id.et_importe);
-                /*
-                et_importe.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if(s.length()>0){
-                            obs_description[0] =s.toString();
-                        } else  {
-                            obs_description[0] ="";
-                        }
-                    }
-                });
-
-                 */
 
                 builder.setView(view);
                 alertDialog = builder.create();
