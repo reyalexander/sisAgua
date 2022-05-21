@@ -28,9 +28,11 @@ import com.example.sisagua.R;
 import com.example.sisagua.database.SqliteClass;
 import com.example.sisagua.models.Abonado;
 import com.example.sisagua.models.Lectura;
+import com.example.sisagua.models.LecturaResponse;
 import com.example.sisagua.models.Medidor;
 import com.example.sisagua.network.InterfaceAPI;
 import com.example.sisagua.network.RetrofitClientInstance;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +49,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewSuministroActivity extends AppCompatActivity{
-    String URL = "http://192.168.0.101:8080/";
+    String URL = "http://192.168.0.100:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
     String sup = "0";
 
@@ -55,15 +57,17 @@ public class NewSuministroActivity extends AppCompatActivity{
     TextView tv_data;
     Spinner spnr_medidor,spnr_abonado;
     Button bt_add_suministro;
+    TextInputEditText et_lectura;
+
+
     Context context = this;
     Activity activity = this;
 
     List<Medidor> getMedidoresCodigo = new ArrayList<>();
     List<Abonado> getAbonadosNames= new ArrayList<>();
 
-
-    ArrayList<Abonado> abonados = new ArrayList<Abonado>();
     Medidor medidor = new Medidor();
+    Abonado abonado = new Abonado();
 
 
     @Override
@@ -74,9 +78,15 @@ public class NewSuministroActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //getMedidores();
+        //getAbonados();
+
         txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
+        //et_lectura = (EditText) findViewById(R.id.et_lectura);
+        //et_importe = (EditText) findViewById(R.id.et_importe);
+
         getAbonados();
         getMedidores();
 
@@ -94,16 +104,12 @@ public class NewSuministroActivity extends AppCompatActivity{
 
             @Override
             public void afterTextChanged(Editable s) {
-                /*
+
                 System.out.println("Hola pedo pendejosss");
-                System.out.println(abonadoModels);
                 TextView contador = (TextView) findViewById(R.id.texto_contador);
                 String tamanoString = String.valueOf(s.length());
                 contador.setText(s.toString());
                 System.out.println(s +"   "+tamanoString);
-                 */
-
-                getAbonados();
                 System.out.println("");
             }
         });
@@ -125,9 +131,8 @@ public class NewSuministroActivity extends AppCompatActivity{
                 Button btnCancel = (Button)view.findViewById(R.id.btn_cancel);
 
                 final String[] obs_description = new String[2];
-                final EditText et_lectura = (EditText) view.findViewById(R.id.et_lectura);
-                final EditText et_importe = (EditText) view.findViewById(R.id.et_importe);
 
+                final EditText et_lectura= (EditText) view.findViewById(R.id.et_lectura);
 
                 et_lectura.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -144,12 +149,15 @@ public class NewSuministroActivity extends AppCompatActivity{
                     public void afterTextChanged(Editable s) {
                         if(s.length()>0){
                             obs_description[0] =s.toString();
+                            createLectura();
                         } else  {
                             obs_description[0] ="";
                         }
                     }
                 });
 
+                final EditText et_importe = (EditText) view.findViewById(R.id.et_importe);
+                /*
                 et_importe.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -170,32 +178,17 @@ public class NewSuministroActivity extends AppCompatActivity{
                         }
                     }
                 });
+
+                 */
+
                 builder.setView(view);
                 alertDialog = builder.create();
-                final SharedPreferences sharedPref = context.getSharedPreferences("lectura", Context.MODE_PRIVATE);
-                final SharedPreferences.Editor editor = sharedPref.edit();
 
                 btnFire.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        SharedPreferences sharedPref =context.getSharedPreferences("login_preferences", Context.MODE_PRIVATE);
-                        Lectura lectura = new Lectura();
-                        lectura.setLecturaActual(0);
-                        lectura.setAboId(0);
-                        lectura.setCicloId(0);
-                        lectura.setMedidorId(0);
-
-                        String id = String.valueOf(lectura.getAboId());
-                        final String idSql = String.valueOf(lectura.getIdSQL());
-
-                        Call<List<Lectura>> postLocationHead = api.postLecturas(token);
-
-                        try {
-                            Response<List<Lectura>> responseLocation = postLocationHead.execute();
-                        }catch (IOException e){
-                            e.printStackTrace();
-                        }
+                        postLecturas(createLectura());
+                        //Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
                     }
                 });
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -211,11 +204,53 @@ public class NewSuministroActivity extends AppCompatActivity{
 
     }
 
+    /*
+    Funcionalidad para utilizar el boton de ir atras
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent i =new Intent(NewSuministroActivity.this,MainActivity.class);
         startActivity(i);
         finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    public Lectura createLectura(){
+        et_lectura = (TextInputEditText) findViewById(R.id.et_lectura);
+
+        String tamanoString = String.valueOf(et_lectura.length());
+        System.out.println(tamanoString + "  HOLA");
+        Lectura lectura = new Lectura();
+        lectura.setAboId(abonado.getId());
+        int lecActual = Integer.parseInt(et_lectura.getText().toString());
+        lectura.setLecturaActual(lecActual);
+
+        //lectura.setMedidorId(medidor.getId());
+
+        return lectura;
+    }
+
+    public void postLecturas(Lectura lectura){
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
+        Call<Lectura> call = interfaceAPI.postLecturas(token, lectura);
+        call.enqueue(new Callback<Lectura>() {
+            @Override
+            public void onResponse(Call<Lectura> call, Response<Lectura> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                }else {
+                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!", Toast.LENGTH_SHORT);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Lectura> call, Throwable t) {
+                Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!!", Toast.LENGTH_SHORT);
+            }
+        });
+
+
     }
     /*
     private void getAbonados(){
@@ -277,7 +312,6 @@ public class NewSuministroActivity extends AppCompatActivity{
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spnr_abonado.setAdapter(adapter);
                     }
-
                 }
             }
 
@@ -285,7 +319,6 @@ public class NewSuministroActivity extends AppCompatActivity{
             public void onFailure(Call<List<Abonado>> call, Throwable t) {
                 Toast.makeText(NewSuministroActivity.this,"Error de conexion", Toast.LENGTH_SHORT);
             }
-
         });
     }
 
@@ -309,7 +342,6 @@ public class NewSuministroActivity extends AppCompatActivity{
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spnr_medidor.setAdapter(adapter);
                     }
-
                 }
             }
 

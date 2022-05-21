@@ -2,6 +2,7 @@ package com.example.sisagua.network;
 
 import com.example.sisagua.models.Abonado;
 import com.example.sisagua.models.Lectura;
+import com.example.sisagua.models.LecturaResponse;
 import com.example.sisagua.models.Medidor;
 
 import java.util.ArrayList;
@@ -24,6 +25,6 @@ public interface InterfaceAPI {
     Call<List<Medidor>> getMedidores(@Header("authorization") String auth);
 
     @POST ("api/suministros/lectura-generacion-lista")
-    Call<List<Lectura>> postLecturas(@Header("authorization") String auth);
+    Call<Lectura> postLecturas(@Header("authorization") String auth, @Body Lectura lectura);
 
 }

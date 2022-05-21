@@ -3,12 +3,12 @@ import java.lang.Integer;
 
 public class Lectura{
 
-    private int idSQL;
+    private int id;
     private int lecturaActual;
     private int aboId;
     private int cicloId;
     private int medidorId;
-
+/*
     public Lectura(){
         lecturaActual = 0;
         aboId = 0;
@@ -17,19 +17,21 @@ public class Lectura{
     }
 
     public Lectura(int idSQL, int lecturaActual, int aboId, int cicloId, int medidorId) {
-        this.idSQL = idSQL;
+        this.id = id;
         this.lecturaActual = lecturaActual;
         this.aboId = aboId;
         this.cicloId = cicloId;
         this.medidorId = medidorId;
     }
 
+ */
+
     public int getIdSQL() {
-        return idSQL;
+        return id;
     }
 
     public void setIdSQL(int idSQL) {
-        this.idSQL = idSQL;
+        this.id = idSQL;
     }
 
     public int getLecturaActual() {
@@ -65,3 +67,4 @@ public class Lectura{
     }
 
 }
+

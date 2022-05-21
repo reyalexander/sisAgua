@@ -99,6 +99,14 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/iv_nointernet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:src="@drawable/ic_wifi_network"/>
+
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -132,8 +140,8 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:layout_width="49dp"
-                android:layout_height="43dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:adjustViewBounds="false"
                 android:contentDescription="@string/add_contentDescription"
@@ -145,7 +153,10 @@
 
         </LinearLayout>
 
+
     </com.google.android.material.card.MaterialCardView>
+
+
 
 
 </LinearLayout>

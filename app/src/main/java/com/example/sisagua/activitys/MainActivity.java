@@ -1,30 +1,44 @@
 package com.example.sisagua.activitys;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.example.sisagua.R;
+import com.example.sisagua.database.SqliteClass;
+import com.example.sisagua.dialogs.CommonDialogs;
 import com.example.sisagua.models.Abonado;
 import com.example.sisagua.network.InterfaceAPI;
+import com.example.sisagua.network.RetrofitClientInstance;
 import com.example.sisagua.utils.ConnectionDetector;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.cardview.widget.CardView;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -34,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     ConnectionDetector connectionDetector;
     static ProgressDialog dialog;
+
+    String URL = "http://192.168.0.100:8080/";
+    String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
+
+    static Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
+    static final InterfaceAPI api = retrofit.create(InterfaceAPI.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +89,59 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+/*
+    private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo ni = manager.getActiveNetworkInfo();
+            onNetworkChange(ni);
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    public void onPause() {
+        unregisterReceiver(networkStateReceiver);
+        super.onPause();
+    }
+
+    private void onNetworkChange(NetworkInfo networkInfo) {
+        ImageView imagenSinConexion = (ImageView) findViewById(R.id.iv_nointernet);
+        imagenSinConexion.setVisibility(View.INVISIBLE);
+
+        if (networkInfo != null) {
+            if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                Toast.makeText(context,"Conectado",Toast.LENGTH_SHORT).show();
+                /*
+                List<Abonado> abonadosList = SqliteClass.getInstance(context).databasehelp.abonadoSql.getAllAbonados();
+                imagenSinConexion.setVisibility(View.INVISIBLE);
+
+                if(abonadosList.size()>0){
+                    Toast.makeText(context,"Conectado",Toast.LENGTH_LONG).show();
+                    new UpdateInformation().execute(true);
+                }
+
+                 */
+/*
+            }
+            Toast.makeText(context,"Conectado",Toast.LENGTH_LONG).show();
+            Log.d("MenuActivity", "CONNECTED");
+        }else {
+            imagenSinConexion.setVisibility(View.VISIBLE);
+            Animation animation = AnimationUtils.loadAnimation(context,R.anim.blink_animation);
+            //animation.setDuration(1000);
+            imagenSinConexion.setAnimation(animation);
+
+            Toast.makeText(context,"No se pudo conectar verifique el acceso a internet",Toast.LENGTH_LONG).show();
+            Log.d("MenuActivity", "DISCONNECTED");
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,13 +151,15 @@ public class MainActivity extends AppCompatActivity {
         //menu.findItem(R.id.action_profile).setVisible(false);
         return true;
     }
-
+    /*
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent i =new Intent(MainActivity.this,LoginActivity.class);
         startActivity(i);
         finish();
         return super.onOptionsItemSelected(item);
     }
+    */
+
     /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -96,45 +171,54 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(context,"El equipo no tiene conexión a internet",Toast.LENGTH_LONG).show();
             }
         }
+        else if (id == R.id.action_logout) {
+            CommonDialogs.showLogoutDialog(this,context);
+        }
         return super.onOptionsItemSelected(item);
     }
 
-     */
-    /*
+
     class UpdateInformation extends AsyncTask<Boolean, Void, String>{
         @Override
         protected void onPreExecute(){
             dialog = ProgressDialog.show(context, "", "Loading...", true);
+            SqliteClass.getInstance(context).databasehelp.abonadoSql.deleteAbonados();
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(String s){
             dialog.dismiss();
-            super.onPreExecute();
+            if(s.equals("ok")){
+                //Intent intent = new Intent(LoginActivity.this, FormNewCheckListActivity.class);
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                context.startActivity(intent);
+                //context.finish();
+            } else {
+                Toast.makeText(context,"Problemas para acceder al servidor",Toast.LENGTH_LONG).show();
+            }
+            super.onPostExecute(s);
         }
 
         @Override
         protected String doInBackground(Boolean... booleans){
-            String token = "";
+            String result = "";
             try {
 
-                Call<List<Abonado>> getAbonados = api.getAbonados();
+                Call<List<Abonado>> getAbonados = api.getAbonados(token);
                 Response<List<Abonado>> responseAbonados = getAbonados.execute();
                 List<Abonado> listResponseAbonados = responseAbonados.body();
-                /*
+
                 for(Abonado abonado : listResponseAbonados){
+                    abonado.setNombres(abonado.getNombres());
                     SqliteClass.getInstance(context).databasehelp.abonadoSql.addAbonado(abonado);
                 }
-
-
-
 
             }catch (IOException e){
                 e.printStackTrace();
             }
-            return "";
+            return result;
         }
-
     }*/
 }

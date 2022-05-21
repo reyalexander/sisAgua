@@ -27,13 +27,6 @@ public class SqliteClass {
     public static final String AboDomicilio = "AboDomicilio";
     public static final String AboDNI = "AboDni";
 
-    /* @TABLE_Lectura*/
-    public static final String TABLE_LECTURA = "app_lectura";
-    public static final String LecID = "LecID";
-    public static final String LecAbonadoId = "LecAbonadoId";
-    public static final String LecMedidorId = "LecMedidorId";
-    public static final String LecCiclo = "LecCiclo";
-    public static final String LecActual = "LecActual";
     /* @TABLE_Medidor*/
     public static final String TABLE_MEDIDOR = "app_medidor";
     public static final String MedID = "MedID";
@@ -43,6 +36,14 @@ public class SqliteClass {
     public static final String MedTipo = "MedTipo";
     public static final String MedlecturaActual = "MedlecturaActual";
     public static final String MedfechaActual = "MedfechaActual";
+
+    /* @TABLE_Lectura*/
+    public static final String TABLE_LECTURA = "app_lectura";
+    public static final String LecID = "LecID";
+    public static final String LecAbonadoId = "LecAbonadoId";
+    public static final String LecMedidorId = "LecMedidorId";
+    public static final String LecCiclo = "LecCiclo";
+    public static final String LecActual = "LecActual";
 
     public DatabaseHelper databasehelp;
     private static SqliteClass SqliteInstance = null;
@@ -61,7 +62,7 @@ public class SqliteClass {
     public class DatabaseHelper extends SQLiteOpenHelper {
         public Context context;
         private static final int DATABASE_VERSION = 1;
-        private static final String DATABASE_NAME = "lectura.db";
+        private static final String DATABASE_NAME = "app_sisagua.db";
 
         public AppAbonadoSql abonadoSql;
         public AppMedidorSql MedidorSql;
@@ -101,6 +102,7 @@ public class SqliteClass {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_ABONADO);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDIDOR);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_LECTURA);
+            onCreate(db);
         }
 
         public boolean checkDataBase(){
@@ -111,7 +113,7 @@ public class SqliteClass {
             context.deleteDatabase(DATABASE_NAME);
         }
 
-        /* @CLASS_USERSQL */
+        /* @CLASS_ABONADOSQL */
         public class AppAbonadoSql {
             public AppAbonadoSql() {
             }
