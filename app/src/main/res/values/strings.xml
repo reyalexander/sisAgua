@@ -65,4 +65,5 @@
     <string name="add_contentDescription">Imagen de Agregar</string>
     <string name="text_acciones">ACCIONES</string>
     <string name="levantamiento_de_observaciones">Levantamiento de Observaciones</string>
+    <string name="et_agregar_nueva_lectura">AGREGAR NUEVA LECTURA</string>
 </resources>

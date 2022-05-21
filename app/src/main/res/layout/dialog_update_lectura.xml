@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="60dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -26,7 +28,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Añadir Lectura"
                     android:textColor="@color/colorGris"
                     android:textSize="20sp" />
@@ -34,8 +36,8 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="-60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="-60dp"
                 android:layout_weight="0.50">
                 <ImageView
                     android:src="@drawable/ic_list_check"
@@ -64,13 +66,14 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/idlectura"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    app:endIconMode="none"
-                    app:endIconTint="@color/colorGris"
-                    android:hint="AGREGAR NUEVA LECTURA"
                     android:layout_marginTop="5dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:hint="@string/et_agregar_nueva_lectura"
+                    app:endIconMode="none"
+                    app:endIconTint="@color/colorGris">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_lectura"
@@ -94,7 +97,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:textColorHint="#757575"
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>

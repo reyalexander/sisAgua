@@ -49,7 +49,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewSuministroActivity extends AppCompatActivity{
-    String URL = "http://192.168.0.100:8080/";
+    String URL = "http://192.168.0.8:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
     String sup = "0";
 
@@ -134,7 +134,7 @@ public class NewSuministroActivity extends AppCompatActivity{
 
                 final EditText et_lectura= (EditText) view.findViewById(R.id.et_lectura);
 
-                et_lectura.addTextChangedListener(new TextWatcher() {
+                /*et_lectura.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -154,7 +154,7 @@ public class NewSuministroActivity extends AppCompatActivity{
                             obs_description[0] ="";
                         }
                     }
-                });
+                });*/
 
                 final EditText et_importe = (EditText) view.findViewById(R.id.et_importe);
                 /*
@@ -215,18 +215,9 @@ public class NewSuministroActivity extends AppCompatActivity{
     }
 
     public Lectura createLectura(){
-        et_lectura = (TextInputEditText) findViewById(R.id.et_lectura);
 
-        String tamanoString = String.valueOf(et_lectura.length());
-        System.out.println(tamanoString + "  HOLA");
-        Lectura lectura = new Lectura();
-        lectura.setAboId(abonado.getId());
-        int lecActual = Integer.parseInt(et_lectura.getText().toString());
-        lectura.setLecturaActual(lecActual);
 
-        //lectura.setMedidorId(medidor.getId());
-
-        return lectura;
+        return null;
     }
 
     public void postLecturas(Lectura lectura){
