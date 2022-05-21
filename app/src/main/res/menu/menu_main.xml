@@ -18,6 +18,6 @@
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="Cerrar sesión"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_system_update_black_24dp"
         app:showAsAction="never" />
 </menu>

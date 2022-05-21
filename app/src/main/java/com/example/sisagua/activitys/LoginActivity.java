@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.sisagua.R;
 import com.example.sisagua.database.SqliteClass;
 import com.example.sisagua.models.Abonado;
+import com.example.sisagua.models.Medidor;
 import com.example.sisagua.network.InterfaceAPI;
 import com.example.sisagua.network.RetrofitClientInstance;
 
@@ -153,6 +154,15 @@ public class LoginActivity extends AppCompatActivity {
                 for(Abonado abonado : listResponseAbonados){
                     abonado.setNombres(abonado.getNombres());
                     SqliteClass.getInstance(context).databasehelp.abonadoSql.addAbonado(abonado);
+                }
+
+                Call<List<Medidor>> getMedidores = api.getMedidores(token);
+                Response<List<Medidor>> responseMedidores = getMedidores.execute();
+                List<Medidor> listResponseMedidores = responseMedidores.body();
+
+                for(Medidor medidor : listResponseMedidores){
+                    medidor.setCodigo(medidor.getCodigo());
+                    SqliteClass.getInstance(context).databasehelp.MedidorSql.addMedidor(medidor);
                 }
 
                 return "ok";
