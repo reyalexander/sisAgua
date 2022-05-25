@@ -49,7 +49,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewSuministroActivity extends AppCompatActivity{
-    String URL = "http://192.168.0.100:8080/";
+    String URL = "http://192.168.0.103:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
     String sup = "0";
 
@@ -148,10 +148,10 @@ public class NewSuministroActivity extends AppCompatActivity{
                     public void afterTextChanged(Editable s) {
                         if(s.length()>0){
                             obs_description[0] =s.toString();
-                            createLectura();
                         } else  {
                             obs_description[0] ="";
                         }
+                        createLectura(obs_description);
                     }
                 });
 
@@ -162,8 +162,28 @@ public class NewSuministroActivity extends AppCompatActivity{
                 btnFire.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        postLecturas(createLectura());
-                        //Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                        /*
+                        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
+                                .addConverterFactory(GsonConverterFactory.create()).build();
+                        InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
+                        Call<Lectura> call = interfaceAPI.postLecturas(token, lectura);
+                        call.enqueue(new Callback<Lectura>() {
+                            @Override
+                            public void onResponse(Call<Lectura> call, Response<Lectura> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                                }else {
+                                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!", Toast.LENGTH_SHORT);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Lectura> call, Throwable t) {
+                                Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!!", Toast.LENGTH_SHORT);
+                            }
+                        });
+                        */
+                        Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
                     }
                 });
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -189,14 +209,12 @@ public class NewSuministroActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public Lectura createLectura(){
-        et_lectura = (TextInputEditText) findViewById(R.id.et_lectura);
+    public Lectura createLectura(String[] obs_description){
 
-        String tamanoString = String.valueOf(et_lectura.length());
-        System.out.println(tamanoString + "  HOLA");
         Lectura lectura = new Lectura();
         lectura.setAboId(abonado.getId());
-        int lecActual = Integer.parseInt(et_lectura.getText().toString());
+        obs_description[0] = et_lectura.getText().toString();
+        int lecActual = Integer.parseInt(obs_description[0]);
         lectura.setLecturaActual(lecActual);
 
         //lectura.setMedidorId(medidor.getId());
