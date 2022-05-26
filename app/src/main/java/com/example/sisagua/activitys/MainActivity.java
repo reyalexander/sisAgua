@@ -49,7 +49,7 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
     Context context;
     ConnectionDetector connectionDetector;
-    static ProgressDialog dialog;
+    ProgressDialog dialog;
 
     String URL = "http://192.168.0.103:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
@@ -129,12 +129,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            dialog.dismiss();
 
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            finish();
+            dialog.dismiss();
             super.onPostExecute(s);
         }
 
@@ -152,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     abonado.setNombres(abonado.getNombres());
                     SqliteClass.getInstance(context).databasehelp.abonadoSql.addAbonado(abonado);
                 }
-
+                /*
                 // AREA MEDIDORES
                 Call<List<Medidor>> getMedidores = api.getMedidores(token);
                 Response<List<Medidor>> responseMedidores = getMedidores.execute();
@@ -162,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
                     medidor.setCodigo(medidor.getCodigo());
                     SqliteClass.getInstance(context).databasehelp.MedidorSql.addMedidor(medidor);
                 }
+
+                 */
 
                 return "ok";
 

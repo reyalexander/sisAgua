@@ -37,6 +37,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xml.sax.ext.LexicalHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,14 +52,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NewSuministroActivity extends AppCompatActivity{
     String URL = "http://192.168.0.103:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
-    String sup = "0";
 
-    EditText txt_input_abonados;
+    EditText txt_input_abonados, et_lectura;
     TextView tv_data;
     Spinner spnr_medidor,spnr_abonado;
-    Button bt_add_suministro;
-    TextInputEditText et_lectura;
-
+    Button btnFire, btnCancel;
 
     Context context = this;
     Activity activity = this;
@@ -84,10 +82,13 @@ public class NewSuministroActivity extends AppCompatActivity{
         txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
-        //et_lectura = (EditText) findViewById(R.id.et_lectura);
+        et_lectura = (EditText) findViewById(R.id.et_lectura);
+        btnFire = (Button) findViewById(R.id.btn_ok);
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
 
         getAbonados();
         getMedidores();
+        //CallRetrofit();
 
 
         txt_input_abonados.addTextChangedListener(new TextWatcher() {
@@ -113,86 +114,49 @@ public class NewSuministroActivity extends AppCompatActivity{
             }
         });
 
-        bt_add_suministro = (Button) findViewById(R.id.bt_add_suministro);
-        bt_add_suministro.setOnClickListener(new View.OnClickListener() {
+
+        btnFire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  Para retrofit
-                Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
-                final InterfaceAPI api = retrofit.create(InterfaceAPI.class);
 
-                final AlertDialog alertDialog;
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view = inflater.inflate(R.layout.dialog_update_lectura, null);
 
-                Button btnFire = (Button)view.findViewById(R.id.btn_ok);
-                Button btnCancel = (Button)view.findViewById(R.id.btn_cancel);
-
-                final String[] obs_description = new String[2];
-
-                final EditText et_lectura= (EditText) view.findViewById(R.id.et_lectura);
-
-                et_lectura.addTextChangedListener(new TextWatcher() {
+                postLecturas(createLectura());
+                Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                Intent intent = new Intent(NewSuministroActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+                /*
+                Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
+                        .addConverterFactory(GsonConverterFactory.create()).build();
+                InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
+                Call<Lectura> call = interfaceAPI.postLecturas(token, lectura);
+                call.enqueue(new Callback<Lectura>() {
                     @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if(s.length()>0){
-                            obs_description[0] =s.toString();
-                        } else  {
-                            obs_description[0] ="";
+                    public void onResponse(Call<Lectura> call, Response<Lectura> response) {
+                        if(response.isSuccessful()){
+                            Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                        }else {
+                            Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!", Toast.LENGTH_SHORT);
                         }
-                        createLectura(obs_description);
                     }
-                });
 
-
-                builder.setView(view);
-                alertDialog = builder.create();
-
-                btnFire.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        /*
-                        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
-                                .addConverterFactory(GsonConverterFactory.create()).build();
-                        InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
-                        Call<Lectura> call = interfaceAPI.postLecturas(token, lectura);
-                        call.enqueue(new Callback<Lectura>() {
-                            @Override
-                            public void onResponse(Call<Lectura> call, Response<Lectura> response) {
-                                if(response.isSuccessful()){
-                                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
-                                }else {
-                                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!", Toast.LENGTH_SHORT);
-                                }
-                            }
+                    public void onFailure(Call<Lectura> call, Throwable t) {
+                        Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!!", Toast.LENGTH_SHORT);
+                    }
+                });
+                */
 
-                            @Override
-                            public void onFailure(Call<Lectura> call, Throwable t) {
-                                Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!!", Toast.LENGTH_SHORT);
-                            }
-                        });
-                        */
-                        Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
-                    }
-                });
-                btnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
-                alertDialog.show();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewSuministroActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -209,14 +173,23 @@ public class NewSuministroActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public Lectura createLectura(String[] obs_description){
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(context, "Envio Exitoso", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+    }
+
+    public Lectura createLectura(){
 
         Lectura lectura = new Lectura();
         lectura.setAboId(abonado.getId());
-        obs_description[0] = et_lectura.getText().toString();
-        int lecActual = Integer.parseInt(obs_description[0]);
+        String lect = et_lectura.getText().toString();
+        int lecActual = Integer.parseInt(lect);
         lectura.setLecturaActual(lecActual);
-
         //lectura.setMedidorId(medidor.getId());
 
         return lectura;

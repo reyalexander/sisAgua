@@ -8,7 +8,8 @@ public class Lectura{
     private int aboId;
     private int cicloId;
     private int medidorId;
-/*
+
+
     public Lectura(){
         lecturaActual = 0;
         aboId = 0;
@@ -16,15 +17,10 @@ public class Lectura{
         medidorId = 0;
     }
 
-    public Lectura(int idSQL, int lecturaActual, int aboId, int cicloId, int medidorId) {
-        this.id = id;
+    public Lectura(int lecturaActual) {
         this.lecturaActual = lecturaActual;
-        this.aboId = aboId;
-        this.cicloId = cicloId;
-        this.medidorId = medidorId;
     }
 
- */
 
     public int getIdSQL() {
         return id;
