@@ -16,46 +16,78 @@
         android:gravity="center"
         android:text="@string/text_acciones"
         android:textColor="#B84A27"
-        android:textSize="32sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         tools:text="@string/text_acciones" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/ideaCard_lev"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="gone"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_data"
+            android:text="Cargar Datos"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            app:cornerRadius="10dp"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:elevation="10dp"
+            android:focusable="true">
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/update_data"
+            android:text="Actualizar Datos"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            app:cornerRadius="10dp"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:elevation="10dp"
+            android:focusable="true">
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@color/moneda"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/levantamiento_de_observaciones"
-                android:textSize="20sp" />
+                android:text="ESPACIO EN BLANCO"
+                android:textColor="#000000"
+                android:textSize="22sp"
+                android:visibility="gone"
+                />
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_list_check"
-                tools:ignore="ImageContrastCheck,ImageContrastCheck"
-                android:contentDescription="TODO" />
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/ideaCard_lista"

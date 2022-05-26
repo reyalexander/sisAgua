@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp"
                 android:enabled="true"
                 android:paddingTop="10dp"
@@ -95,21 +95,6 @@
                 app:backgroundTint="@color/moneda"
                 app:cornerRadius="23dp"
                 tools:ignore="TextContrastCheck" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_register"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:enabled="true"
-                android:text="@string/action_sign_up"
-                android:textColor="@color/colorAccent"
-                app:backgroundTint="@color/white"
-                app:cornerRadius="23dp"
-                app:strokeColor="@color/colorAccent"
-                app:strokeWidth="3dp" />
 
             <TextView
                 android:layout_width="207dp"
@@ -121,7 +106,6 @@
                 android:text="@string/me_olvide_la_contrase_a"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
-
 
         </LinearLayout>
     </ScrollView>

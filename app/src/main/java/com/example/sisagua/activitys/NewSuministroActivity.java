@@ -32,6 +32,7 @@ import com.example.sisagua.models.LecturaResponse;
 import com.example.sisagua.models.Medidor;
 import com.example.sisagua.network.InterfaceAPI;
 import com.example.sisagua.network.RetrofitClientInstance;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,7 +49,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewSuministroActivity extends AppCompatActivity{
-    String URL = "http://192.168.0.8:8080/";
+    String URL = "http://192.168.0.103:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
     String sup = "0";
 
@@ -56,7 +57,7 @@ public class NewSuministroActivity extends AppCompatActivity{
     TextView tv_data;
     Spinner spnr_medidor,spnr_abonado;
     Button bt_add_suministro;
-
+    TextInputEditText et_lectura;
 
 
     Context context = this;
@@ -80,13 +81,10 @@ public class NewSuministroActivity extends AppCompatActivity{
         //getMedidores();
         //getAbonados();
 
-        txt_input_abonados  = (EditText) findViewById(R.id.txt_input_abonados);
-
-
+        txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
-
-
+        //et_lectura = (EditText) findViewById(R.id.et_lectura);
 
         getAbonados();
         getMedidores();
@@ -133,17 +131,59 @@ public class NewSuministroActivity extends AppCompatActivity{
 
                 final String[] obs_description = new String[2];
 
+                final EditText et_lectura= (EditText) view.findViewById(R.id.et_lectura);
+
+                et_lectura.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if(s.length()>0){
+                            obs_description[0] =s.toString();
+                        } else  {
+                            obs_description[0] ="";
+                        }
+                        createLectura(obs_description);
+                    }
+                });
+
+
                 builder.setView(view);
                 alertDialog = builder.create();
 
                 btnFire.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
+                        /*
+                        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
+                                .addConverterFactory(GsonConverterFactory.create()).build();
+                        InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
+                        Call<Lectura> call = interfaceAPI.postLecturas(token, lectura);
+                        call.enqueue(new Callback<Lectura>() {
+                            @Override
+                            public void onResponse(Call<Lectura> call, Response<Lectura> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                                }else {
+                                    Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!", Toast.LENGTH_SHORT);
+                                }
+                            }
 
-                        createLectura();
-                        //postLecturas(createLectura());
-                        //Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
+                            @Override
+                            public void onFailure(Call<Lectura> call, Throwable t) {
+                                Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!!", Toast.LENGTH_SHORT);
+                            }
+                        });
+                        */
+                        Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
                     }
                 });
                 btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -169,12 +209,17 @@ public class NewSuministroActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public Lectura createLectura(){
-        EditText et_lectura, et_importe;
-        et_lectura = (EditText) findViewById(R.id.et_lectura);
-        et_importe = (EditText) findViewById(R.id.et_importe);
-        Toast.makeText(NewSuministroActivity.this,"Lectura ingresada: !"+et_lectura.toString()+"\nImporte Ingresado: "+et_importe.toString(), Toast.LENGTH_SHORT);
-        return null;
+    public Lectura createLectura(String[] obs_description){
+
+        Lectura lectura = new Lectura();
+        lectura.setAboId(abonado.getId());
+        obs_description[0] = et_lectura.getText().toString();
+        int lecActual = Integer.parseInt(obs_description[0]);
+        lectura.setLecturaActual(lecActual);
+
+        //lectura.setMedidorId(medidor.getId());
+
+        return lectura;
     }
 
     public void postLecturas(Lectura lectura){
