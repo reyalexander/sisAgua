@@ -66,4 +66,9 @@
     <string name="text_acciones">ACCIONES</string>
     <string name="levantamiento_de_observaciones">Levantamiento de Observaciones</string>
     <string name="et_agregar_nueva_lectura">AGREGAR NUEVA LECTURA</string>
+    <string name="agregar_nueva_lectura">AGREGAR NUEVA LECTURA</string>
+    <string name="agregar">Agregar</string>
+    <string name="cancel">Cancel</string>
+    <string name="agregar_importe_update">AGREGAR IMPORTE</string>
+    <string name="a_adir_lectura_titulo_update">Añadir Lectura</string>
 </resources>

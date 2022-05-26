@@ -32,7 +32,6 @@ import com.example.sisagua.models.LecturaResponse;
 import com.example.sisagua.models.Medidor;
 import com.example.sisagua.network.InterfaceAPI;
 import com.example.sisagua.network.RetrofitClientInstance;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +56,7 @@ public class NewSuministroActivity extends AppCompatActivity{
     TextView tv_data;
     Spinner spnr_medidor,spnr_abonado;
     Button bt_add_suministro;
-    TextInputEditText et_lectura;
+
 
 
     Context context = this;
@@ -81,10 +80,13 @@ public class NewSuministroActivity extends AppCompatActivity{
         //getMedidores();
         //getAbonados();
 
-        txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
+        txt_input_abonados  = (EditText) findViewById(R.id.txt_input_abonados);
+
+
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
-        //et_lectura = (EditText) findViewById(R.id.et_lectura);
+
+
 
         getAbonados();
         getMedidores();
@@ -131,38 +133,16 @@ public class NewSuministroActivity extends AppCompatActivity{
 
                 final String[] obs_description = new String[2];
 
-                final EditText et_lectura= (EditText) view.findViewById(R.id.et_lectura);
-
-                /*et_lectura.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if(s.length()>0){
-                            obs_description[0] =s.toString();
-                            createLectura();
-                        } else  {
-                            obs_description[0] ="";
-                        }
-                    }
-                });*/
-
-
                 builder.setView(view);
                 alertDialog = builder.create();
 
                 btnFire.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
-                        postLecturas(createLectura());
+
+                        createLectura();
+                        //postLecturas(createLectura());
                         //Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
                     }
                 });
@@ -190,8 +170,10 @@ public class NewSuministroActivity extends AppCompatActivity{
     }
 
     public Lectura createLectura(){
-
-
+        EditText et_lectura, et_importe;
+        et_lectura = (EditText) findViewById(R.id.et_lectura);
+        et_importe = (EditText) findViewById(R.id.et_importe);
+        Toast.makeText(NewSuministroActivity.this,"Lectura ingresada: !"+et_lectura.toString()+"\nImporte Ingresado: "+et_importe.toString(), Toast.LENGTH_SHORT);
         return null;
     }
 

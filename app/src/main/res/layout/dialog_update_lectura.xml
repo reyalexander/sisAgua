@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="60dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -26,22 +28,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Añadir Lectura"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/a_adir_lectura_titulo_update"
                     android:textColor="@color/colorGris"
                     android:textSize="20sp" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="-60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="-60dp"
                 android:layout_weight="0.50">
                 <ImageView
                     android:src="@drawable/ic_list_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:scaleType="center"
                     android:contentDescription="@string/app_name" />
             </RelativeLayout>
@@ -64,37 +66,51 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    app:endIconMode="none"
-                    app:endIconTint="@color/colorGris"
-                    android:hint="AGREGAR NUEVA LECTURA"
-                    android:layout_marginTop="5dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/agregar_nueva_lectura"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/colorAccent"
+                    app:endIconTint="@color/colorGris">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_lectura"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:inputType="text"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:shadowColor="#000000"
+                        android:textColor="#000000"
+                        android:textColorHint="#000000"
+                        android:textSize="18sp"
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    app:endIconMode="none"
-                    app:endIconTint="@color/colorGris"
-                    android:hint="AGREGAR IMPORTE"
-                    android:layout_marginTop="5dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/agregar_importe_update"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/colorAccent"
+                    app:endIconTint="@color/colorGris">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_importe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:inputType="text"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:shadowColor="#000000"
+                        android:textColor="#000000"
+                        android:textColorHint="#000000"
+                        android:textSize="18sp"
+                        tools:ignore="TextContrastCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -109,17 +125,19 @@
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content">
             <Button android:id="@+id/btn_cancel"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                style="?android:attr/buttonBarButtonStyle" />
             <Button android:id="@+id/btn_ok"
-                android:text="Agregar"
+                android:text="@string/agregar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
