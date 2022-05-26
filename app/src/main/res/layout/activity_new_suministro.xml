@@ -24,8 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:gravity="center_horizontal|top"
-                android:paddingTop="100dp"
-                android:paddingBottom="80dp"
+                android:paddingTop="50dp"
+                android:paddingBottom="50dp"
                 android:text="Creación Suministro"
                 android:textColor="@color/black"
                 android:textSize="28dp"
@@ -37,7 +37,7 @@
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:paddingVertical="15dp"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -129,7 +129,7 @@
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:paddingVertical="15dp"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="5dp">
 
                 <LinearLayout
@@ -209,6 +209,79 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="5dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/lnyt_text_inputs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatCheckedTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="18dp"
+                        android:hint="LECTURA ANTERIOR"
+                        app:endIconMode="none"
+                        app:endIconTint="@color/colorGris"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:endIconTint="@color/colorGris"
+                        android:hint="AGREGAR NUEVA LECTURA">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/et_lectura"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:paddingVertical="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:text="Cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/moneda"/>
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:text="Agregar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="40dp"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/moneda"/>
+            </LinearLayout>
 
 
         </LinearLayout>
