@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,7 +54,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class NewSuministroActivity extends AppCompatActivity{
-    String URL = "http://192.168.0.8:8080/";
+    String URL = "http://192.168.0.103:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
 
     EditText txt_input_abonados, et_lectura;
@@ -66,6 +67,9 @@ public class NewSuministroActivity extends AppCompatActivity{
 
     List<Medidor> getMedidoresCodigo = new ArrayList<>();
     List<Abonado> getAbonadosNames= new ArrayList<>();
+
+    ArrayList<LecturaResponse> postLecturas = new ArrayList<>();
+    ArrayList<Integer> postLecturasData = new ArrayList<Integer>();
     int MedidorE,  AbonadoE;
 
     Medidor medidor = new Medidor();
@@ -80,8 +84,8 @@ public class NewSuministroActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        //getMedidores();
-        //getAbonados();
+        getMedidores();
+        getAbonados();
 
         txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
@@ -115,11 +119,6 @@ public class NewSuministroActivity extends AppCompatActivity{
         btnFire = (Button) findViewById(R.id.btn_ok);
         btnCancel = (Button) findViewById(R.id.btn_cancel);
 
-        getAbonados();
-        getMedidores();
-        //CallRetrofit();
-
-
         txt_input_abonados.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -143,12 +142,9 @@ public class NewSuministroActivity extends AppCompatActivity{
             }
         });
 
-
         btnFire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 postLecturas(createLectura());
                 Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
                 Intent intent = new Intent(NewSuministroActivity.this,MainActivity.class);
@@ -188,8 +184,6 @@ public class NewSuministroActivity extends AppCompatActivity{
                 finish();
             }
         });
-
-
     }
 
     /*
@@ -212,31 +206,40 @@ public class NewSuministroActivity extends AppCompatActivity{
         super.onBackPressed();
     }
 
-    public Lectura createLectura(){
+    public ArrayList<LecturaResponse> createLectura(){
 
-        Lectura lectura = new Lectura();
+        LecturaResponse lectura = new LecturaResponse();
 
         String lect = et_lectura.getText().toString();
         int lecActual = Integer.parseInt(lect);
+        lectura.setLecturaActual(lecActual);
         lectura.setLecturaActual(lecActual);
         Calendar c1 = Calendar.getInstance();
         lectura.setCicloId(c1.get(Calendar.MONTH)+1);
         lectura.setAboId(AbonadoE);
         lectura.setMedidorId(MedidorE);
-        //lectura.setMedidorId(medidor.getId());
+        postLecturas.add(lectura);
 
-        return lectura;
+        return postLecturas;
     }
 
-    public void postLecturas(Lectura lectura){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create()).build();
+    public void postLecturas(ArrayList<LecturaResponse> lectura){
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         InterfaceAPI interfaceAPI = retrofit.create(InterfaceAPI.class);
-        Call<Lectura> call = interfaceAPI.postLecturas(token, lectura);
+        Lectura lectura1 = new Lectura();
+        lectura1.setData(lectura);
+        Call<Lectura> call = interfaceAPI.postLecturas(token, lectura1);
+        System.out.println(lectura1);
+
         call.enqueue(new Callback<Lectura>() {
             @Override
             public void onResponse(Call<Lectura> call, Response<Lectura> response) {
                 if(response.isSuccessful()){
+                    Lectura rs = response.body();
                     Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!", Toast.LENGTH_SHORT);
                 }else {
                     Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!", Toast.LENGTH_SHORT);
@@ -245,11 +248,9 @@ public class NewSuministroActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Lectura> call, Throwable t) {
-                Toast.makeText(NewSuministroActivity.this,"Guardado Exitosamente!!!", Toast.LENGTH_SHORT);
+                Toast.makeText(NewSuministroActivity.this,"Something went wrong...Please try later!", Toast.LENGTH_SHORT);
             }
         });
-
-
     }
     /*
     private void getAbonados(){

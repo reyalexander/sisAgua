@@ -3,121 +3,75 @@ import java.lang.Integer;
 
 public class LecturaResponse{
 
-    private int idSQL;
     private int id;
-    private int medidorLecturaActual;
-    private int medidorLecturaAnterior;
-    private int numeroRecibo;
-    private String nombreCompletoAbonado;
-    private String fechaCreacion;
-    private String fechaEmision;
-    private String ciclo;
-    private String codigoMedidor;
-    private String codigoSuministro;
-    private int consumo;
-    private int importe;
+    private int lecturaActual;
+    private int aboId;
+    private int cicloId;
+    private int medidorId;
+
+
+    public LecturaResponse(){
+        lecturaActual = 0;
+        aboId = 0;
+        cicloId = 0;
+        medidorId = 0;
+    }
+
+
+    public LecturaResponse(int aboId, int cicloId, int medidorId, int lecturaActual) {
+        this.aboId = aboId;
+        this.cicloId = cicloId;
+        this.medidorId = medidorId;
+        this.lecturaActual = lecturaActual;
+    }
+
 
     public int getIdSQL() {
-        return idSQL;
-    }
-
-    public void setIdSQL(int idSQL) {
-        this.idSQL = idSQL;
-    }
-
-    public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdSQL(int idSQL) {
+        this.id = idSQL;
     }
 
-    public int getMedidorLecturaActual() {
-        return medidorLecturaActual;
+    public int getLecturaActual() {
+        return lecturaActual;
     }
 
-    public void setMedidorLecturaActual(int medidorLecturaActual) {
-        this.medidorLecturaActual = medidorLecturaActual;
+    public void setLecturaActual(int lecturaActual) {
+        this.lecturaActual = lecturaActual;
     }
 
-    public int getMedidorLecturaAnterior() {
-        return medidorLecturaAnterior;
+    public int getAboId() {
+        return aboId;
     }
 
-    public void setMedidorLecturaAnterior(int medidorLecturaAnterior) {
-        this.medidorLecturaAnterior = medidorLecturaAnterior;
+    public void setAboId(int aboId) {
+        this.aboId = aboId;
     }
 
-    public int getNumeroRecibo() {
-        return numeroRecibo;
+    public int getCicloId() {
+        return cicloId;
     }
 
-    public void setNumeroRecibo(int numeroRecibo) {
-        this.numeroRecibo = numeroRecibo;
+    public void setCicloId(int cicloId) {
+        this.cicloId = cicloId;
     }
 
-    public String getNombreCompletoAbonado() {
-        return nombreCompletoAbonado;
+    public int getMedidorId() {
+        return medidorId;
     }
 
-    public void setNombreCompletoAbonado(String nombreCompletoAbonado) {
-        this.nombreCompletoAbonado = nombreCompletoAbonado;
+    public void setMedidorId(int medidorId) {
+        this.medidorId = medidorId;
     }
 
-    public String getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public String getFechaEmision() {
-        return fechaEmision;
-    }
-
-    public void setFechaEmision(String fechaEmision) {
-        this.fechaEmision = fechaEmision;
-    }
-
-    public String getCiclo() {
-        return ciclo;
-    }
-
-    public void setCiclo(String ciclo) {
-        this.ciclo = ciclo;
-    }
-
-    public String getCodigoMedidor() {
-        return codigoMedidor;
-    }
-
-    public void setCodigoMedidor(String codigoMedidor) {
-        this.codigoMedidor = codigoMedidor;
-    }
-
-    public String getCodigoSuministro() {
-        return codigoSuministro;
-    }
-
-    public void setCodigoSuministro(String codigoSuministro) {
-        this.codigoSuministro = codigoSuministro;
-    }
-
-    public int getConsumo() {
-        return consumo;
-    }
-
-    public void setConsumo(int consumo) {
-        this.consumo = consumo;
-    }
-
-    public int getImporte() {
-        return importe;
-    }
-
-    public void setImporte(int importe) {
-        this.importe = importe;
+    @Override
+    public String toString() {
+        return
+                " lecturaActual=" + lecturaActual +
+                ", aboId=" + aboId +
+                ", cicloId=" + cicloId +
+                ", medidorId=" + medidorId ;
     }
 }

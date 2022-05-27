@@ -1,76 +1,21 @@
 package com.example.sisagua.models;
+import com.google.gson.annotations.SerializedName;
+
 import java.lang.Integer;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Lectura{
+public class Lectura {
 
-    private int id;
-    private int lecturaActual;
-    private int aboId;
-    private int cicloId;
-    private int medidorId;
+    @SerializedName("data")
+    private ArrayList<LecturaResponse> data;
 
-
-    public Lectura(){
-        lecturaActual = 0;
-        aboId = 0;
-        cicloId = 0;
-        medidorId = 0;
+    public ArrayList<LecturaResponse> getData() {
+        return data;
     }
 
-    public Lectura(int lecturaActual) {
-        this.lecturaActual = lecturaActual;
-    }
-
-
-    public int getIdSQL() {
-        return id;
-    }
-
-    public void setIdSQL(int idSQL) {
-        this.id = idSQL;
-    }
-
-    public int getLecturaActual() {
-        return lecturaActual;
-    }
-
-    public void setLecturaActual(int lecturaActual) {
-        this.lecturaActual = lecturaActual;
-    }
-
-    public int getAboId() {
-        return aboId;
-    }
-
-    public void setAboId(int aboId) {
-        this.aboId = aboId;
-    }
-
-    public int getCicloId() {
-        return cicloId;
-    }
-
-    public void setCicloId(int cicloId) {
-        this.cicloId = cicloId;
-    }
-
-    public int getMedidorId() {
-        return medidorId;
-    }
-
-    public void setMedidorId(int medidorId) {
-        this.medidorId = medidorId;
-    }
-
-    @Override
-    public String toString() {
-        return "Lectura{" +
-                "id=" + id +
-                ", lecturaActual=" + lecturaActual +
-                ", aboId=" + aboId +
-                ", cicloId=" + cicloId +
-                ", medidorId=" + medidorId +
-                '}';
+    public void setData(ArrayList<LecturaResponse> data) {
+        this.data = data;
     }
 }
 

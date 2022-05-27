@@ -8,6 +8,7 @@ import com.example.sisagua.models.Medidor;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -26,5 +27,6 @@ public interface InterfaceAPI {
 
     @POST ("api/suministros/lectura-generacion-lista")
     Call<Lectura> postLecturas(@Header("authorization") String auth, @Body Lectura lectura);
+
 
 }
