@@ -62,5 +62,15 @@ public class Lectura{
         this.medidorId = medidorId;
     }
 
+    @Override
+    public String toString() {
+        return "Lectura{" +
+                "id=" + id +
+                ", lecturaActual=" + lecturaActual +
+                ", aboId=" + aboId +
+                ", cicloId=" + cicloId +
+                ", medidorId=" + medidorId +
+                '}';
+    }
 }
 

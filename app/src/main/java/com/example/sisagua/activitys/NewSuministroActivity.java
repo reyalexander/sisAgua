@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ import org.xml.sax.ext.LexicalHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,9 +50,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class NewSuministroActivity extends AppCompatActivity{
-    String URL = "http://192.168.0.103:8080/";
+    String URL = "http://192.168.0.8:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
 
     EditText txt_input_abonados, et_lectura;
@@ -63,6 +66,7 @@ public class NewSuministroActivity extends AppCompatActivity{
 
     List<Medidor> getMedidoresCodigo = new ArrayList<>();
     List<Abonado> getAbonadosNames= new ArrayList<>();
+    int MedidorE,  AbonadoE;
 
     Medidor medidor = new Medidor();
     Abonado abonado = new Abonado();
@@ -82,6 +86,31 @@ public class NewSuministroActivity extends AppCompatActivity{
         txt_input_abonados = (EditText) findViewById(R.id.txt_input_abonados);
         spnr_medidor = (Spinner) findViewById(R.id.spnr_medidor);
         spnr_abonado = (Spinner) findViewById(R.id.spnr_abonados);
+        spnr_abonado.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Abonado item =(Abonado)(parent.getItemAtPosition(position));
+                AbonadoE= item.getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spnr_medidor.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Medidor item =(Medidor)(parent.getItemAtPosition(position));
+                MedidorE = item.getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         et_lectura = (EditText) findViewById(R.id.et_lectura);
         btnFire = (Button) findViewById(R.id.btn_ok);
         btnCancel = (Button) findViewById(R.id.btn_cancel);
@@ -186,10 +215,14 @@ public class NewSuministroActivity extends AppCompatActivity{
     public Lectura createLectura(){
 
         Lectura lectura = new Lectura();
-        lectura.setAboId(abonado.getId());
+
         String lect = et_lectura.getText().toString();
         int lecActual = Integer.parseInt(lect);
         lectura.setLecturaActual(lecActual);
+        Calendar c1 = Calendar.getInstance();
+        lectura.setCicloId(c1.get(Calendar.MONTH)+1);
+        lectura.setAboId(AbonadoE);
+        lectura.setMedidorId(MedidorE);
         //lectura.setMedidorId(medidor.getId());
 
         return lectura;
@@ -273,6 +306,8 @@ public class NewSuministroActivity extends AppCompatActivity{
                         String name = postabonado.getNombres();
                         String lastname = postabonado.getApellidos();
                         Abonado abonado = new Abonado(name , lastname);
+                        abonado.setId(postabonado.getId());
+                        abonado.setIdSQL(postabonado.getIdSQL());
                         getAbonadosNames.add(abonado);
 
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -303,6 +338,8 @@ public class NewSuministroActivity extends AppCompatActivity{
                     for (Medidor post : response.body()){
                         String code = post.getCodigo();
                         Medidor medidor = new Medidor(code);
+                        medidor.setId(post.getId());
+                        medidor.setIdSQL(post.getIdSQL());
                         getMedidoresCodigo.add(medidor);
 
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -318,4 +355,6 @@ public class NewSuministroActivity extends AppCompatActivity{
 
         });
     }
+
+
 }

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
     ProgressDialog dialog;
 
-    String URL = "http://192.168.0.103:8080/";
+    String URL = "http://192.168.0.8:8080/";
     String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmlja05hbWUiOiJKdWFuUCIsInVzZXJJZCI6MSwiaWF0IjoxNjA2ODQ5ODcyLCJleHAiOjE2MDcwMjI2NzJ9.SoVZwyIH20P9kLhllHRUn1QRQX-BQwMXFRrbtIwpw70";
 
     static Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
